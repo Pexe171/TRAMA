@@ -23,17 +23,51 @@
  * @param {HTMLUListElement} menuPrincipal - Lista principal de navegação.
  */
 function configurarMenuResponsivo(botaoMenu, menuPrincipal) {
+  const classeVisivel = 'menu-principal--visivel';
+
+  const abrirMenu = () => {
+    menuPrincipal.classList.add(classeVisivel);
+    botaoMenu.setAttribute('aria-expanded', 'true');
+  };
+
+  const fecharMenu = () => {
+    menuPrincipal.classList.remove(classeVisivel);
+    botaoMenu.setAttribute('aria-expanded', 'false');
+  };
+
   botaoMenu.addEventListener('click', () => {
-    const menuVisivel = menuPrincipal.hasAttribute('hidden') === false;
+    const menuVisivel = menuPrincipal.classList.contains(classeVisivel);
 
     if (menuVisivel) {
-      menuPrincipal.setAttribute('hidden', '');
-      botaoMenu.setAttribute('aria-expanded', 'false');
+      fecharMenu();
     } else {
-      menuPrincipal.removeAttribute('hidden');
-      botaoMenu.setAttribute('aria-expanded', 'true');
+      abrirMenu();
     }
   });
+
+  const atualizarMenuPorLargura = () => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    if (typeof window.matchMedia !== 'function') {
+      abrirMenu();
+      return;
+    }
+
+    const deveExibir = window.matchMedia('(min-width: 769px)').matches;
+    if (deveExibir) {
+      abrirMenu();
+    } else {
+      fecharMenu();
+    }
+  };
+
+  atualizarMenuPorLargura();
+
+  if (typeof window !== 'undefined') {
+    window.addEventListener('resize', atualizarMenuPorLargura);
+  }
 }
 
 /**
