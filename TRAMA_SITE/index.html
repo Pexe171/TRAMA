@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TRAMA - Portal de Cinema</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="cabecalho">
+      <div class="cabecalho__marca">
+        <img src="assets/logo-trama.svg" alt="Logotipo TRAMA" class="cabecalho__logo" />
+        <span class="cabecalho__nome">TRAMA</span>
+      </div>
+      <nav class="cabecalho__menu" aria-label="Seções principais">
+        <button class="cabecalho__botao" data-editoria="cine-movimento.html">Cine Movimento</button>
+        <button class="cabecalho__botao" data-editoria="vale-o-ingresso.html">Vale o Ingresso</button>
+        <button class="cabecalho__botao" data-editoria="por-tras-do-cartaz.html">Por Trás do Cartaz</button>
+        <button class="cabecalho__botao" data-editoria="furo-de-roteiro.html">Furo de Roteiro</button>
+        <button class="cabecalho__botao" data-editoria="clube-da-noticia.html">Clube da Notícia</button>
+        <button class="cabecalho__botao" data-editoria="persona-em-cena.html">Persona em Cena</button>
+        <button class="cabecalho__botao" data-editoria="de-volta-para-o-futuro.html">De Volta Para o Futuro</button>
+        <button class="cabecalho__botao" data-editoria="quem-somos.html">Quem Somos</button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="carrossel" aria-label="Destaques do portal">
+        <div class="carrossel__janela">
+          <article class="carrossel__item carrossel__item--ativo">
+            <img src="imagens/destaque-1.jpg" alt="Cena em destaque" class="carrossel__imagem" />
+            <div class="carrossel__descricao">
+              <h2 class="carrossel__titulo">Festival Internacional de Cinema</h2>
+              <p class="carrossel__texto">
+                Acompanhe a cobertura completa do festival com entrevistas, bastidores e muito mais.
+              </p>
+            </div>
+          </article>
+          <article class="carrossel__item">
+            <img src="imagens/destaque-2.jpg" alt="Cena de filme clássico" class="carrossel__imagem" />
+            <div class="carrossel__descricao">
+              <h2 class="carrossel__titulo">Clássicos em Cartaz</h2>
+              <p class="carrossel__texto">Revisite produções que marcaram gerações e conheça novas curiosidades.</p>
+            </div>
+          </article>
+          <article class="carrossel__item">
+            <img src="imagens/destaque-3.jpg" alt="Equipe de produção" class="carrossel__imagem" />
+            <div class="carrossel__descricao">
+              <h2 class="carrossel__titulo">Profissionais nos Bastidores</h2>
+              <p class="carrossel__texto">Histórias inspiradoras de quem dá vida às obras que amamos.</p>
+            </div>
+          </article>
+        </div>
+        <div class="carrossel__controles">
+          <button class="carrossel__controle" aria-label="Slide anterior" data-direcao="anterior">&#10094;</button>
+          <button class="carrossel__controle" aria-label="Próximo slide" data-direcao="proximo">&#10095;</button>
+        </div>
+        <div class="carrossel__indicadores" role="tablist" aria-label="Seleção de slides">
+          <button class="carrossel__indicador carrossel__indicador--ativo" role="tab" aria-selected="true" aria-controls="slide-1"></button>
+          <button class="carrossel__indicador" role="tab" aria-selected="false" aria-controls="slide-2"></button>
+          <button class="carrossel__indicador" role="tab" aria-selected="false" aria-controls="slide-3"></button>
+        </div>
+      </section>
+
+      <section class="destaques" aria-label="Conteúdos em destaque">
+        <article class="destaque">
+          <img src="imagens/destaque-materia-1.jpg" alt="Cena de entrevista" class="destaque__imagem" />
+          <div class="destaque__conteudo">
+            <h3 class="destaque__titulo">Entrevista exclusiva com cineasta premiada</h3>
+            <p class="destaque__resumo">
+              Descubra como a diretora constrói universos envolventes e personagens inesquecíveis.
+            </p>
+            <a class="destaque__link" href="editorias/cine-movimento.html">Leia em Cine Movimento</a>
+          </div>
+        </article>
+        <article class="destaque">
+          <img src="imagens/destaque-materia-2.jpg" alt="Cena de cinema" class="destaque__imagem" />
+          <div class="destaque__conteudo">
+            <h3 class="destaque__titulo">Estreias da semana analisadas</h3>
+            <p class="destaque__resumo">Uma curadoria cuidadosa para você decidir qual filme assistir.</p>
+            <a class="destaque__link" href="editorias/vale-o-ingresso.html">Leia em Vale o Ingresso</a>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="rodape">
+      <p class="rodape__texto">&copy; <span data-ano-atual></span> TRAMA - Todos os direitos reservados.</p>
+      <div class="rodape__redes">
+        <a href="#" class="rodape__link" aria-label="Instagram">
+          <img src="assets/icone-instagram.svg" alt="Instagram" />
+        </a>
+        <a href="#" class="rodape__link" aria-label="YouTube">
+          <img src="assets/icone-youtube.svg" alt="YouTube" />
+        </a>
+        <a href="#" class="rodape__link" aria-label="Newsletter">
+          <img src="assets/icone-newsletter.svg" alt="Newsletter" />
+        </a>
+      </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
