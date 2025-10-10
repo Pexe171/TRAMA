@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="tMostra dMostra">
+  <title id="tMostra">Mostra de clássicos</title>
+  <desc id="dMostra">Imagem estilizada em tons sépia com rolos de filme e estrelas.</desc>
+  <defs>
+    <linearGradient id="gradMostra" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#92400e" />
+      <stop offset="100%" stop-color="#fbbf24" />
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" fill="#1f1304" rx="34" />
+  <g fill="none" stroke="url(#gradMostra)" stroke-width="18" opacity="0.85">
+    <circle cx="200" cy="160" r="80" />
+    <circle cx="440" cy="200" r="92" />
+  </g>
+  <g fill="#fde68a" opacity="0.8">
+    <polygon points="120,70 128,90 150,90 132,104 138,126 120,112 102,126 108,104 90,90 112,90" />
+    <polygon points="520,70 528,90 550,90 532,104 538,126 520,112 502,126 508,104 490,90 512,90" />
+  </g>
+  <text x="320" y="312" font-family="'Le Jour Serif', serif" font-size="46" fill="#fde68a" text-anchor="middle">Clássicos em Movimento</text>
+</svg>
