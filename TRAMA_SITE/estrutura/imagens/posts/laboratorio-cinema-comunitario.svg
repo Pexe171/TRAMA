@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="titulo descricao">
+  <title id="titulo">Laboratório de cinema comunitário</title>
+  <desc id="descricao">Ilustração abstrata em tons vermelhos e amarelos representando coletividade.</desc>
+  <defs>
+    <linearGradient id="gradLab" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#f97316" />
+      <stop offset="100%" stop-color="#facc15" />
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" fill="url(#gradLab)" rx="32" />
+  <g fill="#fff8e6" opacity="0.6">
+    <circle cx="120" cy="96" r="52" />
+    <circle cx="220" cy="164" r="68" />
+    <circle cx="360" cy="120" r="44" />
+    <circle cx="480" cy="210" r="84" />
+    <circle cx="560" cy="90" r="48" />
+  </g>
+  <text x="56" y="286" font-family="'Glacial Indifference', Arial, sans-serif" font-size="48" fill="#1f2937" font-weight="700">Cinema Comunitário</text>
+</svg>

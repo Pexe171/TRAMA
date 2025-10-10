@@ -6,16 +6,88 @@
     <title>Quem Somos - TRAMA</title>
     <link rel="stylesheet" href="../style.css" />
   </head>
-  <body>
-    <!-- Página institucional da TRAMA -->
-    <header>
-      <nav aria-label="Navegação principal">
-        <a href="../index.html">&larr; Voltar para a página inicial</a>
+  <body class="pagina-editoria">
+    <header class="pagina-editoria__cabecalho">
+      <nav class="pagina-editoria__navegacao" aria-label="Navegação secundária">
+        <a class="pagina-editoria__voltar" href="../index.html">&larr; Voltar para a página inicial</a>
       </nav>
+      <div class="pagina-editoria__identidade">
+        <span class="pagina-editoria__selo">Institucional</span>
+        <h1>Quem Somos</h1>
+        <p>Conheça a equipe multidisciplinar que transforma estratégia em narrativas para o audiovisual.</p>
+      </div>
     </header>
-    <main>
-      <h1>Quem Somos</h1>
-      <p>Conte a história da TRAMA, sua missão e a equipe que constrói o projeto.</p>
+
+    <main class="pagina-editoria__principal pagina-editoria__principal--institucional">
+      <section class="bloco-institucional" aria-labelledby="titulo-missao">
+        <h2 id="titulo-missao">Nosso manifesto</h2>
+        <p>
+          A TRAMA é um laboratório de conteúdo dedicado a conectar criadores, marcas e públicos apaixonados por cinema. Atuamos em
+          múltiplas frentes: investigamos tendências, produzimos reportagens em profundidade e desenhamos experiências editoriais
+          que potencializam lançamentos e catálogos.
+        </p>
+      </section>
+
+      <section class="bloco-institucional" aria-labelledby="titulo-equipe">
+        <h2 id="titulo-equipe">Equipe</h2>
+        <ul class="bloco-institucional__lista">
+          <li>
+            <strong>Gustavo Augusto</strong>
+            <span>Diretor de Estratégia Editorial</span>
+          </li>
+          <li>
+            <strong>Janaina Freitas</strong>
+            <span>Curadora de Narrativas e Tendências</span>
+          </li>
+          <li>
+            <strong>Jhulles dos Santos</strong>
+            <span>Editor de Crítica e Programação</span>
+          </li>
+          <li>
+            <strong>Emily Oliveira</strong>
+            <span>Coordenadora de Campanhas Integradas</span>
+          </li>
+        </ul>
+      </section>
+
+      <section class="bloco-institucional" aria-labelledby="titulo-contato">
+        <h2 id="titulo-contato">Contato</h2>
+        <p>
+          Quer apresentar um projeto, sugerir pauta ou conversar sobre parcerias? Envie uma mensagem para
+          <a href="mailto:contato@trama.com">contato@trama.com</a>. Adoramos criar pontes e pensar novas experiências com o setor.
+        </p>
+      </section>
     </main>
+
+    <footer class="rodape">
+      <div class="rodape__conteudo">
+        <div class="rodape__redes" aria-label="Redes sociais">
+          <a href="https://www.instagram.com" aria-label="Instagram da TRAMA" target="_blank" rel="noreferrer noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path
+                d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4zm5 5a4 4 0 1 0 4 4 4 4 0 0 0-4-4zm0 2.2A1.8 1.8 0 1 1 10.2 12 1.8 1.8 0 0 1 12 10.2zm5.4-3.7a1 1 0 1 0 1 1 1 1 0 0 0-1-1z"
+              />
+            </svg>
+          </a>
+          <a href="https://www.tiktok.com" aria-label="TikTok da TRAMA" target="_blank" rel="noreferrer noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path
+                d="M16.5 3.1A4.5 4.5 0 0 0 13.2 2v12.2a2.3 2.3 0 1 1-2.3-2.3 2.2 2.2 0 0 1 .8.1V9.6a5.1 5.1 0 1 0 3.8 4.9V8.4a6.6 6.6 0 0 0 3.5 1.1V7.1a3.1 3.1 0 0 1-2.5-4z"
+              />
+            </svg>
+          </a>
+          <a href="https://www.youtube.com" aria-label="YouTube da TRAMA" target="_blank" rel="noreferrer noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path
+                d="M21.6 7.2a2.2 2.2 0 0 0-1.5-1.5c-1.3-.4-6.1-.4-6.1-.4s-4.8 0-6.1.4A2.2 2.2 0 0 0 6.4 7.2 22.2 22.2 0 0 0 6 12a22.2 22.2 0 0 0 .4 4.8 2.2 2.2 0 0 0 1.5 1.5c1.3.4 6.1.4 6.1.4s4.8 0 6.1-.4a2.2 2.2 0 0 0 1.5-1.5 22.2 22.2 0 0 0 .4-4.8 22.2 22.2 0 0 0-.4-4.8zM10.5 14.6V9.4l4.6 2.6z"
+              />
+            </svg>
+          </a>
+        </div>
+        <p class="rodape__creditos">Desenvolvido por TRAMA — <span id="ano-atual">2025</span></p>
+      </div>
+    </footer>
+
+    <script src="../script.js"></script>
   </body>
 </html>
