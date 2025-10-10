@@ -1,0 +1,122 @@
+/* Paleta base do site TRAMA */
+:root {
+  --cor-fundo: #0f0f0f;
+  --cor-primaria: #f5c518;
+  --cor-secundaria: #ffffff;
+  --cor-destaque: #f05454;
+  --cor-texto: #e0e0e0;
+  --espacamento-base: 1rem;
+  --fonte-base: 'Arial', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--fonte-base);
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+}
+
+header {
+  background-color: #1a1a1a;
+  padding: var(--espacamento-base);
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+#botao-menu {
+  background-color: var(--cor-primaria);
+  color: #000;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+#botao-menu:focus {
+  outline: 2px solid var(--cor-destaque);
+  outline-offset: 4px;
+}
+
+#menu-principal {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+}
+
+#menu-principal a {
+  color: var(--cor-secundaria);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+#menu-principal a:hover,
+#menu-principal a:focus {
+  color: var(--cor-primaria);
+}
+
+main {
+  max-width: 1200px;
+  margin: var(--espacamento-base) auto;
+  padding: 0 var(--espacamento-base);
+}
+
+.carrossel {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1rem;
+  align-items: center;
+}
+
+.carrossel__itens {
+  position: relative;
+  overflow: hidden;
+  min-height: 200px;
+}
+
+.cartaz {
+  display: none;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: var(--espacamento-base);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.cartaz.ativo {
+  display: block;
+}
+
+.controle {
+  background-color: transparent;
+  color: var(--cor-secundaria);
+  border: 1px solid var(--cor-primaria);
+  padding: 0.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 48px;
+  height: 48px;
+}
+
+.controle:hover,
+.controle:focus {
+  background-color: var(--cor-primaria);
+  color: #000;
+}
+
+footer {
+  text-align: center;
+  padding: var(--espacamento-base);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
