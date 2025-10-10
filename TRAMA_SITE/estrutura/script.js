@@ -23,16 +23,60 @@
  * @param {HTMLUListElement} menuPrincipal - Lista principal de navegação.
  */
 function configurarMenuResponsivo(botaoMenu, menuPrincipal) {
-  botaoMenu.addEventListener('click', () => {
-    const menuVisivel = menuPrincipal.hasAttribute('hidden') === false;
+  const classeMenuVisivel = 'menu-visivel';
+  const consultaMobile = window.matchMedia('(max-width: 768px)');
 
-    if (menuVisivel) {
-      menuPrincipal.setAttribute('hidden', '');
-      botaoMenu.setAttribute('aria-expanded', 'false');
+  /**
+   * Abre o menu principal ajustando atributos de acessibilidade.
+   */
+  const abrirMenu = () => {
+    menuPrincipal.classList.add(classeMenuVisivel);
+    botaoMenu.setAttribute('aria-expanded', 'true');
+  };
+
+  /**
+   * Fecha o menu principal mantendo consistência visual em dispositivos móveis.
+   */
+  const fecharMenu = () => {
+    menuPrincipal.classList.remove(classeMenuVisivel);
+    botaoMenu.setAttribute('aria-expanded', 'false');
+  };
+
+  /**
+   * Define o estado inicial conforme a largura da tela, prevenindo falhas em redimensionamentos.
+   * @param {MediaQueryList | MediaQueryListEvent} mediaQuery - Resultado da consulta de mídia.
+   */
+  const aplicarEstadoInicial = (mediaQuery) => {
+    if ('matches' in mediaQuery && mediaQuery.matches) {
+      fecharMenu();
     } else {
-      menuPrincipal.removeAttribute('hidden');
+      menuPrincipal.classList.remove(classeMenuVisivel);
       botaoMenu.setAttribute('aria-expanded', 'true');
     }
+  };
+
+  aplicarEstadoInicial(consultaMobile);
+
+  if (typeof consultaMobile.addEventListener === 'function') {
+    consultaMobile.addEventListener('change', aplicarEstadoInicial);
+  } else if (typeof consultaMobile.addListener === 'function') {
+    consultaMobile.addListener(aplicarEstadoInicial);
+  }
+
+  botaoMenu.addEventListener('click', () => {
+    if (menuPrincipal.classList.contains(classeMenuVisivel)) {
+      fecharMenu();
+    } else {
+      abrirMenu();
+    }
+  });
+
+  menuPrincipal.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      if (consultaMobile.matches) {
+        fecharMenu();
+      }
+    });
   });
 }
 
