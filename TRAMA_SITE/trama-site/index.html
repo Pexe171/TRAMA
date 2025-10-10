@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TRAMA | Início</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <header>
+        <nav class="menu-principal" aria-label="Menu principal">
+            <button class="botao-menu" type="button" aria-controls="lista-editorias" aria-expanded="false">
+                Menu
+            </button>
+            <ul id="lista-editorias" class="lista-editorias" hidden>
+                <li><a href="editorias/cine-movimento.html">Cine Movimento</a></li>
+                <li><a href="editorias/vale-o-ingresso.html">Vale o Ingresso</a></li>
+                <li><a href="editorias/por-tras-do-cartaz.html">Por Trás do Cartaz</a></li>
+                <li><a href="editorias/furo-de-roteiro.html">Furo de Roteiro</a></li>
+                <li><a href="editorias/clube-da-noticia.html">Clube da Notícia</a></li>
+                <li><a href="editorias/persona-em-cena.html">Persona em Cena</a></li>
+                <li><a href="editorias/de-volta-para-o-futuro.html">De Volta para o Futuro</a></li>
+                <li><a href="editorias/quem-somos.html">Quem Somos</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="carrossel" aria-label="Carrossel de destaques">
+            <div class="carrossel-container" role="list">
+                <article class="slide ativo" role="listitem">
+                    <img src="imagens/destaque-1.jpg" alt="Cena de destaque do filme em cartaz" />
+                    <div class="descricao-slide">
+                        <h2>Destaque da Semana</h2>
+                        <p>Descubra o lançamento que está movimentando as telonas.</p>
+                    </div>
+                </article>
+                <article class="slide" role="listitem">
+                    <img src="imagens/destaque-2.jpg" alt="Cena de making of de produção audiovisual" />
+                    <div class="descricao-slide">
+                        <h2>Por Trás das Câmeras</h2>
+                        <p>Conheça os bastidores das produções mais comentadas.</p>
+                    </div>
+                </article>
+                <article class="slide" role="listitem">
+                    <img src="imagens/destaque-3.jpg" alt="Foto de público em sessão de cinema" />
+                    <div class="descricao-slide">
+                        <h2>Agenda de Estreias</h2>
+                        <p>Fique por dentro dos eventos e estreias imperdíveis.</p>
+                    </div>
+                </article>
+            </div>
+            <div class="controles-carrossel">
+                <button class="controle anterior" type="button" aria-label="Slide anterior">&#9664;</button>
+                <button class="controle proximo" type="button" aria-label="Próximo slide">&#9654;</button>
+            </div>
+        </section>
+        <section class="destaques">
+            <h2>Destaques</h2>
+            <div class="grid-destaques">
+                <article>
+                    <h3>Entrevista exclusiva</h3>
+                    <p>Bate-papo com o elenco que conquistou o público.</p>
+                </article>
+                <article>
+                    <h3>Crítica da semana</h3>
+                    <p>Análise detalhada do filme que está dando o que falar.</p>
+                </article>
+                <article>
+                    <h3>Curadoria especial</h3>
+                    <p>Seleção de clássicos para maratonar no fim de semana.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; <span id="ano-atual"></span> TRAMA. Todos os direitos reservados.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
