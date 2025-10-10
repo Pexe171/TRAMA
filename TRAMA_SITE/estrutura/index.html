@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TRAMA - Cinema em Movimento</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Cabeçalho principal do site -->
+    <header>
+      <nav aria-label="Navegação principal">
+        <button id="botao-menu" aria-expanded="false" aria-controls="menu-principal">
+          Menu
+        </button>
+        <ul id="menu-principal" hidden>
+          <li><a href="editorias/cine-movimento.html">Cine Movimento</a></li>
+          <li><a href="editorias/vale-o-ingresso.html">Vale o Ingresso</a></li>
+          <li><a href="editorias/por-tras-do-cartaz.html">Por Trás do Cartaz</a></li>
+          <li><a href="editorias/furo-de-roteiro.html">Furo de Roteiro</a></li>
+          <li><a href="editorias/clube-da-noticia.html">Clube da Notícia</a></li>
+          <li><a href="editorias/persona-em-cena.html">Persona em Cena</a></li>
+          <li><a href="editorias/de-volta-para-o-futuro.html">De Volta para o Futuro</a></li>
+          <li><a href="editorias/quem-somos.html">Quem Somos</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Destaques com carrossel -->
+    <main>
+      <section aria-label="Destaques de cinema">
+        <h1>Destaques em Cartaz</h1>
+        <div class="carrossel" id="carrossel-destaques">
+          <button class="controle" data-direcao="anterior" aria-label="Ver destaque anterior">&#9664;</button>
+          <div class="carrossel__itens">
+            <article class="cartaz ativo">
+              <h2>Filme em Destaque</h2>
+              <p>Adicione aqui a sinopse e as informações principais do filme.</p>
+            </article>
+            <article class="cartaz">
+              <h2>Próxima Estreia</h2>
+              <p>Espaço reservado para divulgar o lançamento da semana.</p>
+            </article>
+            <article class="cartaz">
+              <h2>Clássico da Semana</h2>
+              <p>Dê destaque a um clássico que vale rever.</p>
+            </article>
+          </div>
+          <button class="controle" data-direcao="proximo" aria-label="Ver próximo destaque">&#9654;</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- Rodapé informativo -->
+    <footer>
+      <p>&copy; <span id="ano-atual"></span> TRAMA. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
