@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" role="img" aria-labelledby="titulo">
+  <title id="titulo">Arte do destaque Ritmo de Resistência</title>
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1f1f1f" />
+      <stop offset="50%" stop-color="#ab1111" />
+      <stop offset="100%" stop-color="#fdd111" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="600" fill="url(#grad1)" />
+  <circle cx="200" cy="200" r="160" fill="rgba(255, 255, 255, 0.08)" />
+  <circle cx="980" cy="160" r="120" fill="rgba(255, 255, 255, 0.12)" />
+  <path d="M100 520 L240 360 L380 520 Z" fill="rgba(255, 255, 255, 0.1)" />
+  <text x="120" y="460" fill="#ffffff" font-family="'Glacial Indifference', Arial, sans-serif" font-size="72" font-weight="700">
+    Ritmo
+  </text>
+  <text x="120" y="520" fill="#ffffff" font-family="'Glacial Indifference', Arial, sans-serif" font-size="56">
+    de Resistência
+  </text>
+</svg>

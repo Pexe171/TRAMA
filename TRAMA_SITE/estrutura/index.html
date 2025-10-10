@@ -78,32 +78,362 @@
 
     <!-- Destaques com carrossel -->
     <main>
-      <section aria-label="Destaques de cinema">
-        <h1>Destaques em Cartaz</h1>
+      <section class="destaques" aria-label="Destaques de cinema">
+        <div class="destaques__cabecalho">
+          <h1 class="destaques__titulo">Destaques em Cartaz</h1>
+          <p class="destaques__descricao">
+            Explore as histórias que estão movimentando o universo audiovisual nesta
+            semana.
+          </p>
+        </div>
         <div class="carrossel" id="carrossel-destaques">
           <button class="controle" data-direcao="anterior" aria-label="Ver destaque anterior">&#9664;</button>
           <div class="carrossel__itens">
-            <article class="cartaz ativo">
-              <h2>Filme em Destaque</h2>
-              <p>Adicione aqui a sinopse e as informações principais do filme.</p>
+            <article
+              class="cartaz ativo"
+              style="--imagem-destaque: url('imagens/destaque-01.svg');"
+            >
+              <div class="cartaz__conteudo">
+                <h2 class="cartaz__titulo">Ritmo de Resistência</h2>
+                <p class="cartaz__texto">
+                  Um olhar vibrante sobre como o cinema independente latino recria as
+                  narrativas da periferia.
+                </p>
+                <a class="botao botao--primario" href="editorias/cine-movimento.html">Ler mais</a>
+              </div>
             </article>
-            <article class="cartaz">
-              <h2>Próxima Estreia</h2>
-              <p>Espaço reservado para divulgar o lançamento da semana.</p>
+            <article
+              class="cartaz"
+              style="--imagem-destaque: url('imagens/destaque-02.svg');"
+            >
+              <div class="cartaz__conteudo">
+                <h2 class="cartaz__titulo">Estreia Imperdível</h2>
+                <p class="cartaz__texto">
+                  A jornada de uma diretora brasileira que estreia em festivais
+                  internacionais.
+                </p>
+                <a class="botao botao--primario" href="editorias/vale-o-ingresso.html">Ler mais</a>
+              </div>
             </article>
-            <article class="cartaz">
-              <h2>Clássico da Semana</h2>
-              <p>Dê destaque a um clássico que vale rever.</p>
+            <article
+              class="cartaz"
+              style="--imagem-destaque: url('imagens/destaque-03.svg');"
+            >
+              <div class="cartaz__conteudo">
+                <h2 class="cartaz__titulo">Clássico em Revisão</h2>
+                <p class="cartaz__texto">
+                  Revisite a obra que transformou o modo como pensamos o futuro nas
+                  telas.
+                </p>
+                <a class="botao botao--primario" href="editorias/de-volta-para-o-futuro.html">Ler mais</a>
+              </div>
             </article>
           </div>
           <button class="controle" data-direcao="proximo" aria-label="Ver próximo destaque">&#9654;</button>
         </div>
       </section>
+
+      <section class="editorias" aria-label="Editorias TRAMA">
+        <h2 class="editorias__titulo">Nossas editorias</h2>
+        <div class="editorias__lista">
+          <article class="editoria" aria-labelledby="titulo-cine-movimento">
+            <div class="editoria__cabecalho">
+              <h3 id="titulo-cine-movimento">Cine Movimento</h3>
+              <p>Documentários e registros que dão voz às ruas.</p>
+            </div>
+            <div class="editoria__grade">
+              <article class="card">
+                <img
+                  src="imagens/card-placeholder.svg"
+                  alt="Cena de documentário urbano"
+                  loading="lazy"
+                />
+                <h4>Mapas sonoros da cidade</h4>
+                <a class="botao botao--secundario" href="editorias/cine-movimento.html">Ver mais</a>
+              </article>
+              <article class="card">
+                <img
+                  src="imagens/card-placeholder.svg"
+                  alt="Pessoas protestando com câmeras"
+                  loading="lazy"
+                />
+                <h4>Olhares periféricos</h4>
+                <a class="botao botao--secundario" href="editorias/cine-movimento.html">Ver mais</a>
+              </article>
+              <article class="card">
+                <img
+                  src="imagens/card-placeholder.svg"
+                  alt="Diretora posicionando a câmera"
+                  loading="lazy"
+                />
+                <h4>Retrospectiva TRAMA.doc</h4>
+                <a class="botao botao--secundario" href="editorias/cine-movimento.html">Ver mais</a>
+              </article>
+            </div>
+          </article>
+
+          <article class="editoria" aria-labelledby="titulo-vale-o-ingresso">
+            <div class="editoria__cabecalho">
+              <h3 id="titulo-vale-o-ingresso">Vale o Ingresso</h3>
+              <p>Críticas afiadas para decidir o que assistir.</p>
+            </div>
+            <div class="editoria__grade">
+              <article class="card">
+                <img
+                  src="imagens/card-placeholder.svg"
+                  alt="Poster iluminado de cinema"
+                  loading="lazy"
+                />
+                <h4>Estreia da semana</h4>
+                <a class="botao botao--secundario" href="editorias/vale-o-ingresso.html">Ver mais</a>
+              </article>
+              <article class="card">
+                <img
+                  src="imagens/card-placeholder.svg"
+                  alt="Sala de cinema vazia"
+                  loading="lazy"
+                />
+                <h4>Top 5 festivais</h4>
+                <a class="botao botao--secundario" href="editorias/vale-o-ingresso.html">Ver mais</a>
+              </article>
+              <article class="card">
+                <img
+                  src="imagens/card-placeholder.svg"
+                  alt="Pessoa segurando ingresso de cinema"
+                  loading="lazy"
+                />
+                <h4>Guia de clássicos</h4>
+                <a class="botao botao--secundario" href="editorias/vale-o-ingresso.html">Ver mais</a>
+              </article>
+            </div>
+          </article>
+
+          <article class="editoria" aria-labelledby="titulo-por-tras">
+            <div class="editoria__cabecalho">
+              <h3 id="titulo-por-tras">Por Trás do Cartaz</h3>
+              <p>Estratégias e bastidores de lançamentos.</p>
+            </div>
+            <div class="editoria__grade">
+              <article class="card">
+                <img
+                  src="imagens/card-placeholder.svg"
+                  alt="Equipe de marketing discutindo cartazes"
+                  loading="lazy"
+                />
+                <h4>Campanhas em foco</h4>
+                <a class="botao botao--secundario" href="editorias/por-tras-do-cartaz.html">Ver mais</a>
+              </article>
+              <article class="card">
+                <img
+                  src="imagens/card-placeholder.svg"
+                  alt="Storyboard colado em parede"
+                  loading="lazy"
+                />
+                <h4>Design estratégico</h4>
+                <a class="botao botao--secundario" href="editorias/por-tras-do-cartaz.html">Ver mais</a>
+              </article>
+              <article class="card">
+                <img
+                  src="imagens/card-placeholder.svg"
+                  alt="Cineasta revisando frames"
+                  loading="lazy"
+                />
+                <h4>Estudos de caso</h4>
+                <a class="botao botao--secundario" href="editorias/por-tras-do-cartaz.html">Ver mais</a>
+              </article>
+            </div>
+          </article>
+
+          <article class="editoria" aria-labelledby="titulo-furo">
+            <div class="editoria__cabecalho">
+              <h3 id="titulo-furo">Furo de Roteiro</h3>
+              <p>Investigações e notícias que mudam o jogo.</p>
+            </div>
+            <div class="editoria__grade">
+              <article class="card">
+                <img
+                  src="imagens/card-placeholder.svg"
+                  alt="Reportagem em set de filmagem"
+                  loading="lazy"
+                />
+                <h4>Exclusivo nos bastidores</h4>
+                <a class="botao botao--secundario" href="editorias/furo-de-roteiro.html">Ver mais</a>
+              </article>
+              <article class="card">
+                <img
+                  src="imagens/card-placeholder.svg"
+                  alt="Roteiro impresso sobre a mesa"
+                  loading="lazy"
+                />
+                <h4>Novos projetos</h4>
+                <a class="botao botao--secundario" href="editorias/furo-de-roteiro.html">Ver mais</a>
+              </article>
+              <article class="card">
+                <img
+                  src="imagens/card-placeholder.svg"
+                  alt="Apresentação de painel de cinema"
+                  loading="lazy"
+                />
+                <h4>Painéis e debates</h4>
+                <a class="botao botao--secundario" href="editorias/furo-de-roteiro.html">Ver mais</a>
+              </article>
+            </div>
+          </article>
+
+          <article class="editoria" aria-labelledby="titulo-clube">
+            <div class="editoria__cabecalho">
+              <h3 id="titulo-clube">Clube da Notícia</h3>
+              <p>Curadoria de insights para profissionais da área.</p>
+            </div>
+            <div class="editoria__grade">
+              <article class="card">
+                <img
+                  src="imagens/card-placeholder.svg"
+                  alt="Mesa redonda com microfones"
+                  loading="lazy"
+                />
+                <h4>Briefing semanal</h4>
+                <a class="botao botao--secundario" href="editorias/clube-da-noticia.html">Ver mais</a>
+              </article>
+              <article class="card">
+                <img
+                  src="imagens/card-placeholder.svg"
+                  alt="Profissionais conversando em evento"
+                  loading="lazy"
+                />
+                <h4>Rede de contatos</h4>
+                <a class="botao botao--secundario" href="editorias/clube-da-noticia.html">Ver mais</a>
+              </article>
+              <article class="card">
+                <img
+                  src="imagens/card-placeholder.svg"
+                  alt="Newsletter aberta em tablet"
+                  loading="lazy"
+                />
+                <h4>Newsletter estratégica</h4>
+                <a class="botao botao--secundario" href="editorias/clube-da-noticia.html">Ver mais</a>
+              </article>
+            </div>
+          </article>
+
+          <article class="editoria" aria-labelledby="titulo-persona">
+            <div class="editoria__cabecalho">
+              <h3 id="titulo-persona">Persona em Cena</h3>
+              <p>Histórias de quem transforma a sétima arte.</p>
+            </div>
+            <div class="editoria__grade">
+              <article class="card">
+                <img
+                  src="imagens/card-placeholder.svg"
+                  alt="Atriz sorrindo em set de filmagem"
+                  loading="lazy"
+                />
+                <h4>Perfil da semana</h4>
+                <a class="botao botao--secundario" href="editorias/persona-em-cena.html">Ver mais</a>
+              </article>
+              <article class="card">
+                <img
+                  src="imagens/card-placeholder.svg"
+                  alt="Diretor ajustando iluminação"
+                  loading="lazy"
+                />
+                <h4>Bastidores em foco</h4>
+                <a class="botao botao--secundario" href="editorias/persona-em-cena.html">Ver mais</a>
+              </article>
+              <article class="card">
+                <img
+                  src="imagens/card-placeholder.svg"
+                  alt="Produtora conversando com equipe"
+                  loading="lazy"
+                />
+                <h4>Mentorias e trajetórias</h4>
+                <a class="botao botao--secundario" href="editorias/persona-em-cena.html">Ver mais</a>
+              </article>
+            </div>
+          </article>
+
+          <article class="editoria" aria-labelledby="titulo-de-volta">
+            <div class="editoria__cabecalho">
+              <h3 id="titulo-de-volta">De Volta para o Futuro</h3>
+              <p>Memórias e tendências que conectam gerações.</p>
+            </div>
+            <div class="editoria__grade">
+              <article class="card">
+                <img
+                  src="imagens/card-placeholder.svg"
+                  alt="Cena clássica remasterizada"
+                  loading="lazy"
+                />
+                <h4>Restauros comentados</h4>
+                <a class="botao botao--secundario" href="editorias/de-volta-para-o-futuro.html">Ver mais</a>
+              </article>
+              <article class="card">
+                <img
+                  src="imagens/card-placeholder.svg"
+                  alt="Projeção de filme antigo"
+                  loading="lazy"
+                />
+                <h4>Programação especial</h4>
+                <a class="botao botao--secundario" href="editorias/de-volta-para-o-futuro.html">Ver mais</a>
+              </article>
+              <article class="card">
+                <img
+                  src="imagens/card-placeholder.svg"
+                  alt="Fã segurando fita VHS"
+                  loading="lazy"
+                />
+                <h4>Colecionismo em pauta</h4>
+                <a class="botao botao--secundario" href="editorias/de-volta-para-o-futuro.html">Ver mais</a>
+              </article>
+            </div>
+          </article>
+        </div>
+      </section>
     </main>
 
     <!-- Rodapé informativo -->
-    <footer>
-      <p>&copy; <span id="ano-atual"></span> TRAMA. Todos os direitos reservados.</p>
+    <footer class="rodape">
+      <div class="rodape__conteudo">
+        <div class="rodape__redes" aria-label="Redes sociais">
+          <a
+            href="https://www.instagram.com"
+            aria-label="Instagram da TRAMA"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path
+                d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4zm5 5a4 4 0 1 0 4 4 4 4 0 0 0-4-4zm0 2.2A1.8 1.8 0 1 1 10.2 12 1.8 1.8 0 0 1 12 10.2zm5.4-3.7a1 1 0 1 0 1 1 1 1 0 0 0-1-1z"
+              />
+            </svg>
+          </a>
+          <a
+            href="https://www.tiktok.com"
+            aria-label="TikTok da TRAMA"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path
+                d="M16.5 3.1A4.5 4.5 0 0 0 13.2 2v12.2a2.3 2.3 0 1 1-2.3-2.3 2.2 2.2 0 0 1 .8.1V9.6a5.1 5.1 0 1 0 3.8 4.9V8.4a6.6 6.6 0 0 0 3.5 1.1V7.1a3.1 3.1 0 0 1-2.5-4z"
+              />
+            </svg>
+          </a>
+          <a
+            href="https://www.youtube.com"
+            aria-label="YouTube da TRAMA"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path
+                d="M21.6 7.2a2.2 2.2 0 0 0-1.5-1.5c-1.3-.4-6.1-.4-6.1-.4s-4.8 0-6.1.4A2.2 2.2 0 0 0 6.4 7.2 22.2 22.2 0 0 0 6 12a22.2 22.2 0 0 0 .4 4.8 2.2 2.2 0 0 0 1.5 1.5c1.3.4 6.1.4 6.1.4s4.8 0 6.1-.4a2.2 2.2 0 0 0 1.5-1.5 22.2 22.2 0 0 0 .4-4.8 22.2 22.2 0 0 0-.4-4.8zM10.5 14.6V9.4l4.6 2.6z"
+              />
+            </svg>
+          </a>
+        </div>
+        <p class="rodape__creditos">Desenvolvido por TRAMA — 2025</p>
+      </div>
     </footer>
 
     <script src="script.js"></script>
