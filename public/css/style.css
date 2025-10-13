@@ -1,0 +1,84 @@
+/* TRAMA Portal - public/css/style.css v1.9.0 */
+:root {
+    --trama-red: #AB1111;
+    --trama-red-dark: #8c0d0d;
+    --trama-yellow: #FDD111;
+    --text-dark: #1f2937; /* Cinza mais escuro para texto */
+    --text-light: #6b7280; /* Cinza para subtítulos e texto secundário */
+    --bg-light: #f9fafb; /* Fundo levemente acinzentado */
+    --font-playfair: 'Playfair Display', serif;
+    --font-inter: 'Inter', sans-serif;
+}
+
+body {
+    font-family: var(--font-inter);
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+}
+
+.font-playfair {
+    font-family: var(--font-playfair);
+}
+
+/* --- Componentes da Marca --- */
+.bg-trama-red { background-color: var(--trama-red); }
+.text-trama-red { color: var(--trama-red); }
+.border-trama-red { border-color: var(--trama-red); }
+.hover\:bg-trama-red-dark:hover { background-color: var(--trama-red-dark); }
+.hover\:text-trama-red:hover { color: var(--trama-red); }
+.focus\:ring-trama-red:focus {
+    --tw-ring-color: var(--trama-red);
+}
+.focus\:border-trama-red:focus {
+    --tw-border-opacity: 1;
+    border-color: var(--trama-red);
+}
+
+/* --- Cabeçalho e Navegação --- */
+header {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.nav-link {
+    color: var(--text-light);
+    transition: color 0.2s ease-in-out;
+}
+
+.nav-link.active {
+    color: var(--trama-red);
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: var(--trama-red);
+}
+
+/* --- Conteúdo Principal --- */
+.page-title {
+    font-family: var(--font-playfair);
+    font-size: 2.25rem; /* 36px */
+    line-height: 2.5rem; /* 40px */
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.page-description {
+    font-size: 1.125rem; /* 18px */
+    line-height: 1.75rem; /* 28px */
+    color: var(--text-light);
+    max-width: 42rem; /* Aprox. 65ch */
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+/* Mensagem de erro estilizada */
+.error-container {
+    text-align: center;
+    padding: 3rem 1rem;
+    background-color: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+}
+
