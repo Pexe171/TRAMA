@@ -1,4 +1,4 @@
-// TRAMA Portal - public/js/login.js v1.7.0
+// TRAMA Portal - public/js/login.js v1.7.1
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('login-form');
     const errorMessageDiv = document.getElementById('error-message');
@@ -23,14 +23,13 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!res.ok) {
                 throw new Error(data.message || 'Falha no login');
             }
+            
+            // Armazena o token no localStorage para ser usado em outras partes do app
+            localStorage.setItem('token', data.token);
 
-            // Se for admin/editor, redireciona para o dashboard
-            if (data.role === 'admin' || data.role === 'editor') {
-                window.location.href = '/dashboard/admin';
-            } else {
-                // Se for leitor, redireciona para a home
-                window.location.href = '/';
-            }
+            // Redireciona para a home, a verificação de auth no main.js vai tratar o resto
+            window.location.href = '/';
+
 
         } catch (err) {
             errorMessageDiv.textContent = err.message;

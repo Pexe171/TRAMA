@@ -1,4 +1,4 @@
-// TRAMA Portal - middleware/authMiddleware.js v1.7.0
+// TRAMA Portal - middleware/authMiddleware.js v1.8.0
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
@@ -6,7 +6,23 @@ const User = require('../models/User');
 const protect = async (req, res, next) => {
     let token;
 
-    if (req.cookies.token) {
+    // Estratégia 1: Procurar token no cabeçalho de autorização (para chamadas da SPA)
+    if (
+        req.headers.authorization &&
+        req.headers.authorization.startsWith('Bearer')
+    ) {
+        try {
+            token = req.headers.authorization.split(' ')[1];
+            const decoded = jwt.verify(token, process.env.JWT_SECRET);
+            req.user = await User.findById(decoded.id).select('-passwordHash');
+            next();
+        } catch (error) {
+            console.error(error);
+            return res.status(401).json({ message: 'Não autorizado, o token falhou.' });
+        }
+    }
+    // Estratégia 2: Procurar token nos cookies (para proteção de páginas no servidor)
+    else if (req.cookies.token) {
         try {
             token = req.cookies.token;
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -14,12 +30,12 @@ const protect = async (req, res, next) => {
             next();
         } catch (error) {
             console.error(error);
-            res.status(401).json({ message: 'Não autorizado, token falhou.' });
+            return res.status(401).json({ message: 'Não autorizado, o token do cookie falhou.' });
         }
     }
 
     if (!token) {
-        res.status(401).json({ message: 'Não autorizado, sem token.' });
+        return res.status(401).json({ message: 'Não autorizado, sem token.' });
     }
 };
 
@@ -34,4 +50,3 @@ const admin = (req, res, next) => {
 
 
 module.exports = { protect, admin };
-

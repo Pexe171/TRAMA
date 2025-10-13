@@ -21,14 +21,14 @@ const articleSchema = new mongoose.Schema({
     },
     editoriaId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Editoria',
-        required: true
+        ref: 'Editoria'
+        // a obrigatoriedade (required: true) foi removida para simplificar
     },
     tags: [String],
     status: {
         type: String,
         enum: ['rascunho', 'publicado', 'arquivado'],
-        default: 'rascunho'
+        default: 'publicado' // Alterado para 'publicado' por defeito
     },
     publishedAt: { type: Date },
     stats: {
@@ -46,3 +46,4 @@ const articleSchema = new mongoose.Schema({
 articleSchema.index({ title: 'text', summary: 'text', content: 'text', tags: 'text' });
 
 module.exports = mongoose.model('Article', articleSchema);
+

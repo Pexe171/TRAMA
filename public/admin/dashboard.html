@@ -26,42 +26,45 @@
             <!-- Coluna para Criar Nova Postagem -->
             <div class="md:col-span-1 bg-white p-6 rounded-lg shadow-md">
                 <h2 class="text-xl font-bold mb-4">Criar Nova Postagem</h2>
-                <form id="article-form">
-                    <!-- Campos do formulário -->
+                <form id="article-form" enctype="multipart/form-data">
+                    <!-- Campos do formulário simplificados -->
                     <div class="mb-4">
                         <label for="title" class="block text-sm font-medium text-gray-700">Título</label>
-                        <input type="text" id="title" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-trama-red focus:border-trama-red" required>
+                        <input type="text" id="title" name="title" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-trama-red focus:border-trama-red" required>
                     </div>
                     <div class="mb-4">
                         <label for="summary" class="block text-sm font-medium text-gray-700">Resumo</label>
-                        <textarea id="summary" rows="3" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-trama-red focus:border-trama-red" required></textarea>
+                        <textarea id="summary" name="summary" rows="3" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-trama-red focus:border-trama-red" required></textarea>
                     </div>
                     <div class="mb-4">
                         <label for="content" class="block text-sm font-medium text-gray-700">Conteúdo Completo</label>
-                        <textarea id="content" rows="6" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-trama-red focus:border-trama-red"></textarea>
-                    </div>
-                    <div class="mb-4">
-                        <label for="editoria" class="block text-sm font-medium text-gray-700">Editoria</label>
-                        <select id="editoria" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-trama-red focus:border-trama-red" required></select>
+                        <textarea id="content" name="content" rows="10" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-trama-red focus:border-trama-red"></textarea>
                     </div>
                      <div class="mb-4">
-                        <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
-                        <select id="status" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-trama-red focus:border-trama-red" required>
-                            <option value="rascunho">Rascunho</option>
-                            <option value="publicado">Publicado</option>
+                        <label for="format" class="block text-sm font-medium text-gray-700">Formato</label>
+                        <select id="format" name="format" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-trama-red focus:border-trama-red" required>
+                            <option value="texto">Texto</option>
+                            <option value="video">Vídeo</option>
+                            <option value="videocast">Videocast</option>
                         </select>
+                    </div>
+                    <div class="mb-4 hidden" id="video-url-container">
+                        <label for="videoUrl" class="block text-sm font-medium text-gray-700">URL do Vídeo (YouTube)</label>
+                        <input type="url" id="videoUrl" name="videoUrl" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-trama-red focus:border-trama-red" placeholder="https://www.youtube.com/watch?v=...">
                     </div>
                     <div class="mb-4">
                         <label for="coverImage" class="block text-sm font-medium text-gray-700">Imagem de Capa</label>
-                        <input type="file" id="coverImage" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-trama-red file:text-white hover:file:opacity-90">
+                        <input type="file" id="coverImage" name="coverImage" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-trama-red file:text-white hover:file:opacity-90">
                     </div>
-                    <button type="submit" class="w-full bg-trama-red text-white py-2 px-4 rounded-md hover:opacity-90 font-bold">Criar Postagem</button>
+                    <button type="submit" class="w-full bg-trama-red text-white py-2 px-4 rounded-md hover:opacity-90 font-bold">Publicar Postagem</button>
                 </form>
             </div>
 
             <!-- Coluna para Listar Artigos Existentes -->
             <div class="md:col-span-2 bg-white p-6 rounded-lg shadow-md">
-                <h2 class="text-xl font-bold mb-4">Artigos Existentes</h2>
+                <div class="border-b-2 border-gray-200 pb-4 mb-4">
+                    <h2 class="text-xl font-bold">Gerir Conteúdo</h2>
+                </div>
                 <div id="articles-list" class="space-y-4">
                     <!-- A lista de artigos será inserida aqui pelo JavaScript -->
                 </div>
@@ -69,54 +72,6 @@
         </div>
     </main>
     
-    <!-- Modal de Edição (inicialmente escondido) -->
-    <div id="edit-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
-        <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-            <div class="p-6">
-                <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-xl font-bold">Editar Artigo</h2>
-                    <button id="close-modal-button" class="text-gray-500 hover:text-gray-800">&times;</button>
-                </div>
-                <form id="edit-article-form">
-                    <input type="hidden" id="edit-article-id">
-                    <!-- Campos do formulário de edição (iguais ao de criação) -->
-                    <div class="mb-4">
-                        <label for="edit-title" class="block text-sm font-medium text-gray-700">Título</label>
-                        <input type="text" id="edit-title" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3" required>
-                    </div>
-                    <div class="mb-4">
-                        <label for="edit-summary" class="block text-sm font-medium text-gray-700">Resumo</label>
-                        <textarea id="edit-summary" rows="3" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3" required></textarea>
-                    </div>
-                    <div class="mb-4">
-                        <label for="edit-content" class="block text-sm font-medium text-gray-700">Conteúdo Completo</label>
-                        <textarea id="edit-content" rows="6" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"></textarea>
-                    </div>
-                    <div class="mb-4">
-                        <label for="edit-editoria" class="block text-sm font-medium text-gray-700">Editoria</label>
-                        <select id="edit-editoria" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3" required></select>
-                    </div>
-                     <div class="mb-4">
-                        <label for="edit-status" class="block text-sm font-medium text-gray-700">Status</label>
-                        <select id="edit-status" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3" required>
-                            <option value="rascunho">Rascunho</option>
-                            <option value="publicado">Publicado</option>
-                        </select>
-                    </div>
-                    <div class="mb-4">
-                        <label for="edit-coverImage" class="block text-sm font-medium text-gray-700">Nova Imagem de Capa (opcional)</label>
-                        <input type="file" id="edit-coverImage" class="mt-1 block w-full text-sm">
-                    </div>
-                    <div class="flex justify-end gap-4">
-                         <button type="button" id="cancel-edit-button" class="bg-gray-200 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-300">Cancelar</button>
-                         <button type="submit" class="bg-trama-red text-white py-2 px-4 rounded-md hover:opacity-90 font-bold">Salvar Alterações</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-
     <script src="/admin/js/dashboard.js"></script>
 </body>
 </html>

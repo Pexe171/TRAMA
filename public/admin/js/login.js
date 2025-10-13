@@ -1,4 +1,4 @@
-// public/admin/js/login.js
+// public/admin/js/login.js v1.1.0
 
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('login-form');
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const password = document.getElementById('password').value;
 
         try {
-            const res = await fetch('/api/auth/login', {
+            const res = await fetch('/api/auth/login/admin', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -23,12 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await res.json();
 
             if (res.ok) {
-                // Se o login for bem-sucedido e o usuário for admin, redireciona
-                if (data.role === 'admin') {
-                    window.location.href = '/dashboard/admin';
-                } else {
-                    errorMessage.textContent = 'Acesso negado. Apenas administradores.';
-                }
+                // Armazena o token no localStorage para ser usado no dashboard
+                localStorage.setItem('token', data.token);
+                window.location.href = '/dashboard/admin';
             } else {
                 errorMessage.textContent = data.message || 'Erro ao fazer login.';
             }

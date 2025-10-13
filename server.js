@@ -1,4 +1,4 @@
-// TRAMA Portal - server.js v2.3.2
+// TRAMA Portal - server.js v2.3.3
 const express = require('express');
 const dotenv = require('dotenv');
 const path = require('path');
@@ -44,12 +44,27 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Servir os ficheiros de upload (imagens dos artigos)
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Rota para a página principal (SPA - Single Page Application)
+
+// --- ROTAS PARA PÁGINAS ESTÁTICAS ESPECÍFICAS ---
+
+// Rota para a página de Login de Leitor
+app.get('/login', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'public', 'login.html'));
+});
+
+// Rota para a página de Registo de Leitor
+app.get('/register', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'public', 'register.html'));
+});
+
+
+// Rota "apanha-tudo" para a Single Page Application (SPA)
 // Qualquer rota que não foi apanhada pelas APIs ou ficheiros estáticos, serve o index.html
 app.get('*', (req, res) => {
     // Excluir as rotas de admin desta regra para não interferir
     if (req.originalUrl.startsWith('/dashboard') || req.originalUrl.startsWith('/acesso')) {
-        return res.status(404).send('Página não encontrada.');
+        // Deixa o pageRoutes tratar disso ou devolve 404
+        return;
     }
     res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
 });
@@ -57,5 +72,4 @@ app.get('*', (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
-
+app.listen(PORT, () => console.log(`Servidor a rodar na porta ${PORT}`));

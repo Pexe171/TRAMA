@@ -1,4 +1,4 @@
-// TRAMA Portal - routes/authRoutes.js v1.7.0
+// TRAMA Portal - routes/authRoutes.js v1.7.1
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
@@ -61,7 +61,8 @@ router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        const user = await User.findOne({ email });
+        // Procura o usuário e INCLUI explicitamente o passwordHash na busca
+        const user = await User.findOne({ email }).select('+passwordHash');
 
         if (user && (await bcrypt.compare(password, user.passwordHash))) {
             const token = generateToken(user._id);
@@ -76,8 +77,10 @@ router.post('/login', async (req, res) => {
             res.json({
                 _id: user.id,
                 username: user.username,
+                displayName: user.displayName, // Adicionado para consistência
                 email: user.email,
                 role: user.role,
+                token: token // Enviando o token também no corpo da resposta para o frontend
             });
         } else {
             res.status(401).json({ message: 'E-mail ou senha inválidos.' });
@@ -95,7 +98,8 @@ router.post('/login', async (req, res) => {
 router.post('/login/admin', async (req, res) => {
     const { email, password } = req.body;
     try {
-        const user = await User.findOne({ email });
+         // Procura o usuário e INCLUI explicitamente o passwordHash na busca
+        const user = await User.findOne({ email }).select('+passwordHash');
 
         if (user && (user.role === 'admin' || user.role === 'editor') && (await bcrypt.compare(password, user.passwordHash))) {
             const token = generateToken(user._id);
@@ -109,13 +113,15 @@ router.post('/login/admin', async (req, res) => {
 
             res.json({
                 message: "Login de admin bem-sucedido!",
-                role: user.role
+                role: user.role,
+                token: token
             });
 
         } else {
             res.status(401).json({ message: 'Credenciais inválidas ou sem permissão de acesso.' });
         }
     } catch (error) {
+         console.error(error);
         res.status(500).json({ message: 'Erro no servidor' });
     }
 });
@@ -132,4 +138,3 @@ router.post('/logout', (req, res) => {
 });
 
 module.exports = router;
-
