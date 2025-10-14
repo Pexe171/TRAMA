@@ -1,12 +1,13 @@
-// TRAMA Portal - routes/authRoutes.js v1.7.1
+// TRAMA Portal - routes/authRoutes.js v1.8.0
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
-const generateToken = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET, {
+// Gera o token JWT, agora incluindo o nome de exibição (displayName)
+const generateToken = (user) => {
+    return jwt.sign({ id: user._id, displayName: user.displayName }, process.env.JWT_SECRET, {
         expiresIn: '30d',
     });
 };
@@ -61,11 +62,10 @@ router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        // Procura o usuário e INCLUI explicitamente o passwordHash na busca
         const user = await User.findOne({ email }).select('+passwordHash');
 
         if (user && (await bcrypt.compare(password, user.passwordHash))) {
-            const token = generateToken(user._id);
+            const token = generateToken(user); // Passa o objeto 'user' completo
 
             res.cookie('token', token, {
                 httpOnly: true,
@@ -77,10 +77,9 @@ router.post('/login', async (req, res) => {
             res.json({
                 _id: user.id,
                 username: user.username,
-                displayName: user.displayName, // Adicionado para consistência
+                displayName: user.displayName,
                 email: user.email,
                 role: user.role,
-                token: token // Enviando o token também no corpo da resposta para o frontend
             });
         } else {
             res.status(401).json({ message: 'E-mail ou senha inválidos.' });
@@ -98,11 +97,10 @@ router.post('/login', async (req, res) => {
 router.post('/login/admin', async (req, res) => {
     const { email, password } = req.body;
     try {
-         // Procura o usuário e INCLUI explicitamente o passwordHash na busca
         const user = await User.findOne({ email }).select('+passwordHash');
 
         if (user && (user.role === 'admin' || user.role === 'editor') && (await bcrypt.compare(password, user.passwordHash))) {
-            const token = generateToken(user._id);
+            const token = generateToken(user);
 
             res.cookie('token', token, {
                 httpOnly: true,
@@ -113,15 +111,13 @@ router.post('/login/admin', async (req, res) => {
 
             res.json({
                 message: "Login de admin bem-sucedido!",
-                role: user.role,
-                token: token
+                role: user.role
             });
 
         } else {
             res.status(401).json({ message: 'Credenciais inválidas ou sem permissão de acesso.' });
         }
     } catch (error) {
-         console.error(error);
         res.status(500).json({ message: 'Erro no servidor' });
     }
 });

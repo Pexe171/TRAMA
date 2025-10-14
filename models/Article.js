@@ -22,13 +22,12 @@ const articleSchema = new mongoose.Schema({
     editoriaId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Editoria'
-        // a obrigatoriedade (required: true) foi removida para simplificar
     },
     tags: [String],
     status: {
         type: String,
         enum: ['rascunho', 'publicado', 'arquivado'],
-        default: 'publicado' // Alterado para 'publicado' por defeito
+        default: 'publicado'
     },
     publishedAt: { type: Date },
     stats: {
@@ -37,7 +36,12 @@ const articleSchema = new mongoose.Schema({
         ratingsCount: { type: Number, default: 0 },
         ratingsAvg: { type: Number, default: 0 }
     },
-    isFeatured: { type: Boolean, default: false }
+    isFeatured: { type: Boolean, default: false },
+    frameStyle: { 
+        type: String, 
+        enum: ['none', 'wavy-light', 'cinematic-dark'], 
+        default: 'none' 
+    }
 }, {
     timestamps: true
 });
