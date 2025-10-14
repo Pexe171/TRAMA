@@ -1,4 +1,4 @@
-// TRAMA Portal - routes/authRoutes.js v1.8.0
+// TRAMA Portal - routes/authRoutes.js v1.9.0 (Retornando token no login/admin)
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
@@ -80,6 +80,7 @@ router.post('/login', async (req, res) => {
                 displayName: user.displayName,
                 email: user.email,
                 role: user.role,
+                token: token, // Retorna o token para o frontend
             });
         } else {
             res.status(401).json({ message: 'E-mail ou senha inválidos.' });
@@ -111,7 +112,8 @@ router.post('/login/admin', async (req, res) => {
 
             res.json({
                 message: "Login de admin bem-sucedido!",
-                role: user.role
+                role: user.role,
+                token: token, // <--- ADICIONADO: Retorna o token para o frontend
             });
 
         } else {

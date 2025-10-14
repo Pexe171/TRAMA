@@ -1,4 +1,4 @@
-// TRAMA Portal - routes/api.js v2.8.0
+// TRAMA Portal - routes/api.js v2.9.0 (Garantir rotas públicas)
 const express = require('express');
 const router = express.Router();
 
@@ -22,10 +22,11 @@ router.get('/home', async (req, res) => {
 });
 
 
-// @desc    Obter todas as editorias para o menu
+// @desc    Obter todas as editorias para o menu (Apenas ativas)
 // @route   GET /api/editorias
 router.get('/editorias', async (req, res) => {
     try {
+        // Esta rota busca apenas editorias ativas (para o menu principal/público)
         const editorias = await Editoria.find({ isActive: true }).sort({ priority: 1 });
         res.json(editorias);
     } catch (err) {
@@ -85,4 +86,3 @@ router.get('/articles/:editoriaSlug/:articleSlug', async (req, res) => {
 });
 
 module.exports = router;
-
