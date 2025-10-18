@@ -2,6 +2,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const path = require('path');
+const fs = require('fs');
 const cookieParser = require('cookie-parser');
 
 const connectDB = require('./config/db');
@@ -39,12 +40,21 @@ app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/admin', require('./routes/adminRoutes'));
 app.use('/api/interact', require('./routes/interactionRoutes'));
 
-app.use(express.static(path.join(__dirname, 'client')));
 app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 
-app.get('*', (_req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'index.html'));
-});
+const clientBuildPath = path.join(__dirname, 'client', 'build');
+
+if (fs.existsSync(clientBuildPath)) {
+    app.use(express.static(clientBuildPath));
+
+    app.get('*', (_req, res) => {
+        res.sendFile(path.join(clientBuildPath, 'index.html'));
+    });
+} else {
+    app.get('/', (_req, res) => {
+        res.status(200).json({ message: 'API executando. Build do cliente não encontrado.' });
+    });
+}
 
 app.use(notFound);
 app.use(errorHandler);
