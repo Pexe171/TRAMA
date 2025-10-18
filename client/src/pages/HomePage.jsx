@@ -1,27 +1,43 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import LoadingState from '../components/LoadingState';
-import ErrorState from '../components/ErrorState';
 import ArticleCard from '../components/ArticleCard';
 import { api } from '../services/apiClient';
-import { extractSummary, getArticlePrimaryDate, resolveCoverImage } from '../utils/article';
-import { formatDate } from '../utils/format';
+import { resolveCoverImage } from '../utils/article';
 
-// Usando a imagem de cabeçalho que você enviou
-const HERO_IMAGE_URL = 'https://i.postimg.cc/1X4F24xN/image-a59b47.jpg';
+const BANNER_BACKGROUND_URL = 'https://i.postimg.cc/W1g4gPZT/image-a59b47.jpg';
+// NOTA: Esta é uma imagem temporária para o logo. Substitua pelo URL da sua imagem.
+const TRAMA_LOGO_URL = 'https://i.postimg.cc/rpTTsM0p/trama-logo-placeholder.png';
+const ABOUT_US_IMAGE_URL = 'https://i.postimg.cc/k5Pbmwch/IMG-1758.jpg';
 
-const buildArticlePath = (article) => {
-  const editoriaSlug = article?.editoriaId?.slug;
-  if (!editoriaSlug || !article?.slug) {
-    return null;
-  }
-  return `/editorias/${editoriaSlug}/artigos/${article.slug}`;
-};
+// Dados de exemplo para a equipe. No futuro, virão da sua API.
+const mockTeamMembers = [
+  {
+    _id: '1',
+    name: 'Nome do Integrante',
+    favoriteMovie: 'Filme Favorito',
+    imageUrl: 'https://placehold.co/200x200/222326/FFF?text=Foto',
+  },
+  {
+    _id: '2',
+    name: 'Outro Integrante',
+    favoriteMovie: 'Outro Filme Incrível',
+    imageUrl: 'https://placehold.co/200x200/222326/FFF?text=Foto',
+  },
+  {
+    _id: '3',
+    name: 'Mais Um Membro',
+    favoriteMovie: 'Um Clássico do Cinema',
+    imageUrl: 'https://placehold.co/200x200/222326/FFF?text=Foto',
+  },
+];
 
 const HomePage = () => {
   const [homeData, setHomeData] = useState({ articles: [], latestEditoria: null });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // No futuro, você fará uma chamada à API aqui para buscar os integrantes
+  const [teamMembers] = useState(mockTeamMembers);
 
   const carregarConteudo = useCallback(async () => {
     setLoading(true);
@@ -47,90 +63,68 @@ const HomePage = () => {
   }, [carregarConteudo]);
 
   const { articles, latestEditoria } = homeData;
-  const destaque = useMemo(() => (articles.length > 0 ? articles[0] : null), [articles]);
-  const demaisArtigos = useMemo(() => (articles.length > 1 ? articles.slice(1) : []), [articles]);
-
-  const destaquePath = buildArticlePath(destaque);
-  const destaqueResumo = destaque ? extractSummary(destaque, 260) : '';
-  const destaqueData = destaque ? formatDate(getArticlePrimaryDate(destaque)) : '';
 
   return (
     <div className="page home-page">
-      {/* Botão de acessar movido para o Layout global */}
-      
-      {/* Imagem de cabeçalho fixa */}
+      {/* Novo Banner Principal */}
       <section
-        className="hero-section"
-        style={{ backgroundImage: `linear-gradient(120deg, rgba(4, 7, 16, 0.92), rgba(4, 7, 16, 0.6)), url(${HERO_IMAGE_URL})` }}
+        className="banner-section"
+        style={{ backgroundImage: `url(${BANNER_BACKGROUND_URL})` }}
       >
-        <div className="hero-overlay" />
-        <div className="hero-content container">
-          {loading && !destaque ? (
-            <LoadingState message="Buscando novidades..." />
-          ) : error ? (
-            <ErrorState error={error} onRetry={carregarConteudo} />
-          ) : destaque ? (
-            <>
-              <p className="hero-kicker">Em destaque: {destaque?.editoriaId?.title || 'Conteúdo'}</p>
-              <h1>{destaque?.title}</h1>
-              <p className="hero-summary">{destaqueResumo}</p>
-              <div className="hero-meta">
-                <span>{destaqueData}</span>
-                {destaque?.stats?.views ? <span>{destaque.stats.views} visualizaç{destaque.stats.views > 1 ? 'ões' : 'ão'}</span> : null}
-              </div>
-              {destaquePath && (
-                <div className="hero-actions">
-                  <Link className="primary-button" to={destaquePath}>
-                    Ler matéria completa
-                  </Link>
-                </div>
-              )}
-            </>
-          ) : (
-             <>
-              <h1>Bem-vindo(a) ao TRAMA</h1>
-              <p className="hero-summary">
-                Onde cinema encontra estratégia. Explore nossas editorias e mergulhe em análises profundas.
-              </p>
-            </>
-          )}
-        </div>
+        <div className="banner-overlay" />
+        <img src={TRAMA_LOGO_URL} alt="TRAMA Logo" className="trama-logo-overlay" />
       </section>
 
-      {!loading && !error && demaisArtigos.length > 0 && (
+      {/* Seção "Você não pode perder" */}
+      {!loading && !error && latestEditoria && (
+        <section className="container section latest-editoria-section">
+          <div className="section-header">
+            <h2>Você não pode perder</h2>
+          </div>
+          <Link to={`/editorias/${latestEditoria.slug}`} className="latest-editoria-card">
+            <img src={resolveCoverImage(latestEditoria.coverImage)} alt={latestEditoria.title} />
+            <div className="latest-editoria-overlay">
+              <h3>{latestEditoria.title}</h3>
+            </div>
+          </Link>
+        </section>
+      )}
+
+      {!loading && !error && articles.length > 0 && (
         <section className="container section">
           <div className="section-header">
             <h2>Últimas Matérias</h2>
           </div>
           <div className="article-grid">
-            {demaisArtigos.map((article) => (
+            {/* Agora exibe todos os artigos, não apenas os "demais" */}
+            {articles.map((article) => (
               <ArticleCard key={article._id || article.slug} article={article} />
             ))}
           </div>
         </section>
       )}
 
-      {/* Seção "Você não pode perder" */}
-      {!loading && latestEditoria && (
-        <section className="container section">
-          <div className="section-header">
-            <h2>Você não pode perder</h2>
+      {/* Secção "Quem Somos" */}
+      <section className="about-us-section container section">
+        <div className="section-header">
+          <h2>QUEM SOMOS?</h2>
+        </div>
+        <div className="about-us-content">
+          <img src={ABOUT_US_IMAGE_URL} alt="Equipe TRAMA" className="about-us-main-image" />
+          <div className="team-grid">
+            {teamMembers.map((member) => (
+              <div key={member._id} className="team-member-card">
+                <img src={member.imageUrl} alt={member.name} className="team-member-photo" />
+                <h3 className="team-member-name">{member.name}</h3>
+                <p className="team-member-movie">{member.favoriteMovie}</p>
+              </div>
+            ))}
           </div>
-          <div className="article-card">
-             <div className="article-card-image" style={{ backgroundImage: `url(${resolveCoverImage(latestEditoria.coverImage)})` }} aria-hidden="true" />
-             <div className="article-card-body">
-                <p className="article-card-editoria">Última Editoria Publicada</p>
-                <h3>{latestEditoria.title}</h3>
-                <p className="article-card-summary">{latestEditoria.description || 'Explore os artigos desta editoria.'}</p>
-                <Link className="link-button" to={`/editorias/${latestEditoria.slug}`}>
-                    Ver editoria
-                </Link>
-             </div>
-          </div>
-        </section>
-      )}
+        </div>
+      </section>
     </div>
   );
 };
 
 export default HomePage;
+
