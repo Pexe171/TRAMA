@@ -1,138 +1,163 @@
-// TRAMA Portal - routes/authRoutes.js v1.9.0 (Retornando token no login/admin)
+// Rotas de autenticação
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+
+const asyncHandler = require('../middleware/asyncHandler');
 const User = require('../models/User');
 
-// Gera o token JWT, agora incluindo o nome de exibição (displayName)
+const ensureJwtSecret = () => {
+    if (!process.env.JWT_SECRET) {
+        throw new Error('JWT_SECRET não configurado nas variáveis de ambiente.');
+    }
+};
+
 const generateToken = (user) => {
-    return jwt.sign({ id: user._id, displayName: user.displayName }, process.env.JWT_SECRET, {
-        expiresIn: '30d',
+    ensureJwtSecret();
+    return jwt.sign(
+        { id: user._id, displayName: user.displayName, role: user.role },
+        process.env.JWT_SECRET,
+        {
+            expiresIn: '30d',
+        }
+    );
+};
+
+const attachAuthCookie = (res, token) => {
+    res.cookie('token', token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 dias
     });
 };
+
+const sanitizeUser = (user) => ({
+    _id: user.id,
+    username: user.username,
+    displayName: user.displayName,
+    email: user.email,
+    role: user.role,
+});
 
 // @route   POST /api/auth/register
 // @desc    Registrar um novo usuário (leitor)
 // @access  Public
-router.post('/register', async (req, res) => {
-    const { username, email, password, displayName } = req.body;
+router.post(
+    '/register',
+    asyncHandler(async (req, res) => {
+        const { username, email, password, displayName } = req.body;
 
-    try {
-        // Verificar se usuário já existe
-        const userExists = await User.findOne({ email });
-        if (userExists) {
-            return res.status(400).json({ message: 'Usuário já existe com este e-mail.' });
+        if (!username || !email || !password) {
+            res.status(400);
+            throw new Error('Username, e-mail e senha são obrigatórios.');
         }
 
-        // Criptografar a senha
+        if (password.length < 6) {
+            res.status(400);
+            throw new Error('A senha deve conter pelo menos 6 caracteres.');
+        }
+
+        const userExists = await User.findOne({
+            $or: [{ email: email.toLowerCase() }, { username: username.trim() }],
+        }).lean();
+
+        if (userExists) {
+            res.status(400);
+            throw new Error('Já existe um usuário com o e-mail ou username informado.');
+        }
+
         const salt = await bcrypt.genSalt(10);
         const passwordHash = await bcrypt.hash(password, salt);
 
-        // Criar usuário
         const user = await User.create({
-            username,
-            email,
+            username: username.trim(),
+            email: email.toLowerCase(),
             passwordHash,
-            displayName: displayName || username,
-            role: 'leitor' // Novos registros são sempre leitores
+            displayName: displayName ? displayName.trim() : username.trim(),
+            role: 'leitor',
         });
 
-        if (user) {
-            res.status(201).json({
-                _id: user.id,
-                username: user.username,
-                email: user.email,
-                role: user.role,
-                message: 'Usuário registrado com sucesso!'
-            });
-        } else {
-            res.status(400).json({ message: 'Dados de usuário inválidos.' });
-        }
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Erro no servidor.' });
-    }
-});
+        const token = generateToken(user);
+        attachAuthCookie(res, token);
+
+        res.status(201).json({ ...sanitizeUser(user), token, message: 'Usuário registrado com sucesso!' });
+    })
+);
 
 // @route   POST /api/auth/login
 // @desc    Autenticar usuário (qualquer role) e obter token
 // @access  Public
-router.post('/login', async (req, res) => {
-    const { email, password } = req.body;
+router.post(
+    '/login',
+    asyncHandler(async (req, res) => {
+        const { email, password } = req.body;
 
-    try {
-        const user = await User.findOne({ email }).select('+passwordHash');
-
-        if (user && (await bcrypt.compare(password, user.passwordHash))) {
-            const token = generateToken(user); // Passa o objeto 'user' completo
-
-            res.cookie('token', token, {
-                httpOnly: true,
-                secure: process.env.NODE_ENV !== 'development',
-                sameSite: 'strict',
-                maxAge: 30 * 24 * 60 * 60 * 1000 // 30 dias
-            });
-
-            res.json({
-                _id: user.id,
-                username: user.username,
-                displayName: user.displayName,
-                email: user.email,
-                role: user.role,
-                token: token, // Retorna o token para o frontend
-            });
-        } else {
-            res.status(401).json({ message: 'E-mail ou senha inválidos.' });
+        if (!email || !password) {
+            res.status(400);
+            throw new Error('Informe e-mail e senha.');
         }
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Erro no servidor.' });
-    }
-});
 
+        const user = await User.findOne({ email: email.toLowerCase() }).select('+passwordHash');
+
+        if (!user || !(await bcrypt.compare(password, user.passwordHash))) {
+            res.status(401);
+            throw new Error('Credenciais inválidas.');
+        }
+
+        const token = generateToken(user);
+        attachAuthCookie(res, token);
+
+        user.lastLoginAt = new Date();
+        await user.save();
+
+        res.json({ ...sanitizeUser(user), token });
+    })
+);
 
 // @route   POST /api/auth/login/admin
 // @desc    Autenticar um admin/editor
 // @access  Public
-router.post('/login/admin', async (req, res) => {
-    const { email, password } = req.body;
-    try {
-        const user = await User.findOne({ email }).select('+passwordHash');
+router.post(
+    '/login/admin',
+    asyncHandler(async (req, res) => {
+        const { email, password } = req.body;
 
-        if (user && (user.role === 'admin' || user.role === 'editor') && (await bcrypt.compare(password, user.passwordHash))) {
-            const token = generateToken(user);
-
-            res.cookie('token', token, {
-                httpOnly: true,
-                secure: process.env.NODE_ENV !== 'development',
-                sameSite: 'strict',
-                maxAge: 30 * 24 * 60 * 60 * 1000 // 30 dias
-            });
-
-            res.json({
-                message: "Login de admin bem-sucedido!",
-                role: user.role,
-                token: token, // <--- ADICIONADO: Retorna o token para o frontend
-            });
-
-        } else {
-            res.status(401).json({ message: 'Credenciais inválidas ou sem permissão de acesso.' });
+        if (!email || !password) {
+            res.status(400);
+            throw new Error('Informe e-mail e senha.');
         }
-    } catch (error) {
-        res.status(500).json({ message: 'Erro no servidor' });
-    }
-});
+
+        const user = await User.findOne({ email: email.toLowerCase() }).select('+passwordHash');
+
+        if (!user || (user.role !== 'admin' && user.role !== 'editor') || !(await bcrypt.compare(password, user.passwordHash))) {
+            res.status(401);
+            throw new Error('Credenciais inválidas ou sem permissão de acesso.');
+        }
+
+        const token = generateToken(user);
+        attachAuthCookie(res, token);
+
+        user.lastLoginAt = new Date();
+        await user.save();
+
+        res.json({ message: 'Login de admin bem-sucedido!', role: user.role, token });
+    })
+);
 
 // @route   POST /api/auth/logout
 // @desc    Fazer logout do usuário
 // @access  Private
-router.post('/logout', (req, res) => {
-    res.cookie('token', '', {
-        httpOnly: true,
-        expires: new Date(0)
-    });
-    res.status(200).json({ message: 'Logout bem-sucedido.' });
-});
+router.post(
+    '/logout',
+    asyncHandler(async (_req, res) => {
+        res.cookie('token', '', {
+            httpOnly: true,
+            expires: new Date(0),
+        });
+        res.status(200).json({ message: 'Logout bem-sucedido.' });
+    })
+);
 
 module.exports = router;
