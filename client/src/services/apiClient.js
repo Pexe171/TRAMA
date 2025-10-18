@@ -83,6 +83,7 @@ export const api = {
   getArticleBySlug: (editoriaSlug, articleSlug) => request(`/articles/${editoriaSlug}/${articleSlug}`),
   getAboutPage: () => request('/quem-somos'),
   getArticleComments: (articleSlug) => request(`/interact/articles/${articleSlug}/comments`),
+  getLatestEditoria: () => request('/latest-editoria'), // Nova função
 };
 
 export default api;

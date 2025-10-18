@@ -1,37 +1,30 @@
-:root {
-  color-scheme: dark;
-  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  background-color: #050608;
-  color: #f1f5f9;
-  --color-background: #050608;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html,
-body,
-#root {
-  min-height: 100%;
-}
-
+/* client/src/index.css */
 body {
-  background: var(--color-background);
-  color: inherit;
+  margin: 0;
+  font-family: var(--font-body); /* Define a nova fonte padrão para o corpo do texto */
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #fdfdfd;
+  color: #333;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-title-serif); /* Define a nova fonte padrão para títulos */
+  font-weight: 700;
 }
 
 a {
+  text-decoration: none;
   color: inherit;
 }
 
-img {
-  max-width: 100%;
-  display: block;
+.script-title {
+  font-family: var(--font-title-script);
+  font-style: italic;
+  font-weight: 400;
 }

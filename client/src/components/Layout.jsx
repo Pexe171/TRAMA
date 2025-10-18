@@ -42,7 +42,7 @@ const Layout = ({
           >
             Menu
           </button>
-
+          
           <nav
             id="principal-navigation"
             aria-label="Navegação principal"
@@ -55,7 +55,7 @@ const Layout = ({
                 </NavLink>
               </li>
               {editoriasLoading ? (
-                <li className="nav-status">Carregando editorias…</li>
+                <li className="nav-status">Carregando...</li>
               ) : null}
               {!editoriasLoading && editorias?.length > 0
                 ? editorias.map((editoria) => (
@@ -70,7 +70,7 @@ const Layout = ({
                 <li className="nav-error">
                   <ErrorState
                     compact
-                    title="Não foi possível carregar as editorias."
+                    title="Erro ao carregar."
                     error={editoriasError}
                     onRetry={onReloadEditorias}
                   />
@@ -83,6 +83,14 @@ const Layout = ({
               </li>
             </ul>
           </nav>
+          
+          {/* Botão Acessar adicionado aqui */}
+          <div className="header-actions">
+            <a href="/acesso/admin" className="secondary-button" style={{padding: '0.5rem 1rem', fontSize: '0.9rem'}}>
+              Acessar
+            </a>
+          </div>
+
         </div>
       </header>
 
@@ -90,11 +98,20 @@ const Layout = ({
 
       <footer className="site-footer">
         <div className="container footer-content">
+          {/* Links das editorias no rodapé */}
+          {editorias && editorias.length > 0 && (
+            <nav className="footer-nav" aria-label="Editorias">
+              <ul className="footer-nav-list">
+                {editorias.map(e => (
+                  <li key={e._id}>
+                    <Link to={`/editorias/${e.slug}`}>{e.title}</Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          )}
           <p>
             © {new Date().getFullYear()} TRAMA RP — Um coletivo universitário apaixonado por cinema, comunicação e roleplay.
-          </p>
-          <p>
-            Desenvolvido com carinho e boas práticas para conectar a comunidade às histórias que nos inspiram.
           </p>
         </div>
       </footer>

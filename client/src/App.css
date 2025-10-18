@@ -48,9 +48,15 @@
 }
 
 .brand-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.1;
+  display: none; /* Oculto em telas pequenas */
+}
+
+@media (min-width: 640px) {
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
 }
 
 .brand-name {
@@ -77,6 +83,7 @@
   color: #f1f5f9;
   cursor: pointer;
   transition: all 0.2s ease;
+  z-index: 10;
 }
 
 .nav-toggle:hover {
@@ -133,9 +140,16 @@
   color: rgba(252, 165, 165, 0.95);
 }
 
+.header-actions {
+    display: none;
+}
+
 @media (min-width: 960px) {
   .nav-toggle {
     display: none;
+  }
+  .header-actions {
+    display: block;
   }
 
   .site-nav {
@@ -145,6 +159,8 @@
     border: none;
     box-shadow: none;
     padding: 0;
+    margin-left: auto;
+    margin-right: 1.5rem;
   }
 
   .site-nav ul {
@@ -170,15 +186,37 @@
 .footer-content {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 1.5rem;
   font-size: 0.9rem;
   color: rgba(203, 213, 225, 0.78);
   text-align: center;
+  align-items: center;
+}
+
+.footer-nav-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+  justify-content: center;
+}
+
+.footer-nav-list a {
+  color: rgba(203, 213, 225, 0.85);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-nav-list a:hover {
+    color: #f97316;
 }
 
 @media (min-width: 768px) {
   .footer-content {
-    text-align: left;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
   }
 }
 

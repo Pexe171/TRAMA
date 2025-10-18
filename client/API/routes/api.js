@@ -21,6 +21,34 @@ router.get(
     })
 );
 
+// @desc    Obter a última editoria com publicação
+// @route   GET /api/latest-editoria
+router.get(
+    '/latest-editoria',
+    asyncHandler(async (_req, res) => {
+        const latestArticleWithEditoria = await Article.findOne({ 
+            status: 'publicado',
+            editoriaId: { $ne: null } 
+        })
+        .sort({ publishedAt: -1, createdAt: -1 })
+        .populate('editoriaId')
+        .lean();
+
+        if (latestArticleWithEditoria && latestArticleWithEditoria.editoriaId) {
+            res.json(latestArticleWithEditoria.editoriaId);
+        } else {
+            // Se não encontrar, busca a primeira editoria ativa como fallback
+            const fallbackEditoria = await Editoria.findOne({ isActive: true }).sort({ priority: 1, createdAt: -1 }).lean();
+            if (fallbackEditoria) {
+                res.json(fallbackEditoria);
+            } else {
+                res.status(404).json({ message: 'Nenhuma editoria encontrada.' });
+            }
+        }
+    })
+);
+
+
 // @desc    Obter todas as editorias para o menu (Apenas ativas)
 // @route   GET /api/editorias
 router.get(
