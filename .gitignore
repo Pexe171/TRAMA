@@ -1,11 +1,13 @@
 Dependências
 
 /node_modules
+/client/node_modules
 
 Pastas de build de produção
 
 /build
 /dist
+/client/build
 
 Logs
 
