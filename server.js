@@ -1,44 +1,53 @@
-// TRAMA Portal - server.js v4.0.0 (Estrutura Simplificada)
+// Servidor Express principal
 const express = require('express');
 const dotenv = require('dotenv');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+
 const connectDB = require('./config/db');
+const { notFound, errorHandler } = require('./middleware/errorMiddleware');
 
-// Carregar variáveis de ambiente
 dotenv.config();
-
-// Conectar ao banco de dados
 connectDB();
 
 const app = express();
 
-// Middlewares
-app.use(express.json());
+app.use(express.json({ limit: '1mb' }));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-// --- ROTAS DE API ---
-// Mantemos as rotas da API que já funcionam
+app.use((req, res, next) => {
+    const allowedOrigin = process.env.CLIENT_URL;
+    if (allowedOrigin) {
+        res.header('Access-Control-Allow-Origin', allowedOrigin);
+        res.header('Access-Control-Allow-Credentials', 'true');
+    } else {
+        res.header('Access-Control-Allow-Origin', '*');
+    }
+    res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+
+    if (req.method === 'OPTIONS') {
+        return res.sendStatus(204);
+    }
+
+    return next();
+});
+
 app.use('/api', require('./routes/api'));
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/admin', require('./routes/adminRoutes'));
 app.use('/api/interact', require('./routes/interactionRoutes'));
 
-// --- SERVIR ARQUIVOS ESTÁTICOS ---
-// Servir a pasta 'client' que contém o frontend React
 app.use(express.static(path.join(__dirname, 'client')));
-// Servir a pasta de uploads para as imagens
 app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 
-
-// --- ROTA "APANHA-TUDO" PARA A SPA ---
-// Qualquer rota que não seja uma API, serve o frontend
-app.get('*', (req, res) => {
+app.get('*', (_req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'index.html'));
 });
 
+app.use(notFound);
+app.use(errorHandler);
+
 const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => console.log(`Servidor a rodar na porta ${PORT}`));
-
+app.listen(PORT, () => console.log(`Servidor executando na porta ${PORT}`));

@@ -1,18 +1,26 @@
-// TRAMA Portal - config/db.js v1.7.1
+// Configuração de conexão com o MongoDB
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
 dotenv.config();
 
 const connectDB = async () => {
+    const uri = process.env.MONGO_URI;
+    if (!uri) {
+        throw new Error('MONGO_URI não configurado nas variáveis de ambiente.');
+    }
+
     try {
-        const conn = await mongoose.connect(process.env.MONGO_URI);
-        console.log(`MongoDB Conectado: ${conn.connection.host}`);
+        const conn = await mongoose.connect(uri);
+        console.log(`MongoDB conectado: ${conn.connection.host}`);
     } catch (error) {
-        console.error(`Erro: ${error.message}`);
-        process.exit(1); // Sai do processo com falha
+        console.error(`Erro ao conectar ao MongoDB: ${error.message}`);
+        process.exit(1);
     }
 };
 
-module.exports = connectDB;
+mongoose.connection.on('disconnected', () => {
+    console.warn('Conexão com MongoDB perdida. Tentando reconectar...');
+});
 
+module.exports = connectDB;
