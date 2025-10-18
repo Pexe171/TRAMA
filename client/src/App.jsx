@@ -1,61 +1,65 @@
+import { useCallback, useEffect, useState } from 'react';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import Layout from './components/Layout';
+import LoadingState from './components/LoadingState';
+import ErrorState from './components/ErrorState';
+import HomePage from './pages/HomePage';
+import EditoriaPage from './pages/EditoriaPage';
+import ArticlePage from './pages/ArticlePage';
+import AboutPage from './pages/AboutPage';
+import { api } from './services/apiClient';
 import './App.css';
 
-const BACKGROUND_IMAGE_URL = 'https://i.imgur.com/NfP65yq.png';
-const LOGO_URL = 'https://i.postimg.cc/xTKKv8pb/Layout-trama-png.png';
-
-const IntroPage = () => (
-  <div className="intro-page">
-    <div
-      className="background-image"
-      style={{ backgroundImage: `url(${BACKGROUND_IMAGE_URL})` }}
-    />
-    <div className="gradient-overlay" />
-    <div className="content">
-      <img src={LOGO_URL} alt="Logo TRAMA" className="logo" />
-      <section className="social-section" aria-labelledby="social-title">
-        <h2 id="social-title">Siga a Trama nas redes sociais</h2>
-        <p className="social-description">
-          Conecte-se com a comunidade e acompanhe as novidades do servidor.
-        </p>
-        <div className="social-links" role="list">
-          <a
-            className="social-link instagram"
-            href="https://www.instagram.com/tramarp?igsh=NzFiamhxbG53MGl3&utm_source=qr"
-            target="_blank"
-            rel="noreferrer"
-            role="listitem"
-          >
-            <span aria-hidden="true" className="social-icon">IG</span>
-            <span className="social-text">Instagram</span>
-          </a>
-          <a
-            className="social-link youtube"
-            href="https://www.youtube.com/@TramaRP"
-            target="_blank"
-            rel="noreferrer"
-            role="listitem"
-          >
-            <span aria-hidden="true" className="social-icon">▶</span>
-            <span className="social-text">YouTube</span>
-          </a>
-          <a
-            className="social-link tiktok"
-            href="https://www.tiktok.com/@tramarp?_t=ZM-90WzN02ffDg&_r=1"
-            target="_blank"
-            rel="noreferrer"
-            role="listitem"
-          >
-            <span aria-hidden="true" className="social-icon">♬</span>
-            <span className="social-text">TikTok</span>
-          </a>
-        </div>
-      </section>
-    </div>
-  </div>
-);
-
 function App() {
-  return <IntroPage />;
+  const [editorias, setEditorias] = useState([]);
+  const [editoriasLoading, setEditoriasLoading] = useState(true);
+  const [editoriasError, setEditoriasError] = useState(null);
+
+  const carregarEditorias = useCallback(async () => {
+    setEditoriasLoading(true);
+    setEditoriasError(null);
+    try {
+      const data = await api.getEditorias();
+      setEditorias(Array.isArray(data) ? data : []);
+    } catch (err) {
+      setEditoriasError(err);
+    } finally {
+      setEditoriasLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    carregarEditorias();
+  }, [carregarEditorias]);
+
+  return (
+    <BrowserRouter>
+      <Layout
+        editorias={editorias}
+        editoriasLoading={editoriasLoading}
+        editoriasError={editoriasError}
+        onReloadEditorias={carregarEditorias}
+      >
+        {editoriasLoading && editorias.length === 0 && !editoriasError ? (
+          <div className="container section">
+            <LoadingState message="Carregando menu principal..." />
+          </div>
+        ) : null}
+        {editoriasError && editorias.length === 0 ? (
+          <div className="container section">
+            <ErrorState error={editoriasError} onRetry={carregarEditorias} />
+          </div>
+        ) : null}
+        <Routes>
+          <Route element={<HomePage />} path="/" />
+          <Route element={<EditoriaPage />} path="/editorias/:slug" />
+          <Route element={<ArticlePage />} path="/editorias/:editoriaSlug/artigos/:articleSlug" />
+          <Route element={<AboutPage />} path="/quem-somos" />
+          <Route element={<Navigate replace to="/" />} path="*" />
+        </Routes>
+      </Layout>
+    </BrowserRouter>
+  );
 }
 
 export default App;

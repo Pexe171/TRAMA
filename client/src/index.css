@@ -1,7 +1,11 @@
 :root {
-  font-family: 'Inter', sans-serif;
-  color: #ffffff;
-  background-color: #000000;
+  color-scheme: dark;
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  background-color: #050608;
+  color: #f1f5f9;
+  --color-background: #050608;
 }
 
 * {
@@ -10,10 +14,24 @@
   box-sizing: border-box;
 }
 
-body, html, #root {
-  height: 100%;
+html,
+body,
+#root {
+  min-height: 100%;
 }
 
 body {
-  background-color: #000000;
+  background: var(--color-background);
+  color: inherit;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
 }
