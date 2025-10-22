@@ -1,16 +1,16 @@
 import { useEffect } from 'react';
 
-import { useAuthStore } from '../store/authStore';
+import { useSessionStore } from 'features/session/store';
 
 export const useAuth = () => {
-  const initialize = useAuthStore((state) => state.initialize);
-  const status = useAuthStore((state) => state.status);
-  const user = useAuthStore((state) => state.user);
-  const token = useAuthStore((state) => state.token);
-  const login = useAuthStore((state) => state.login);
-  const register = useAuthStore((state) => state.register);
-  const logout = useAuthStore((state) => state.logout);
-  const error = useAuthStore((state) => state.error);
+  const initialize = useSessionStore((state) => state.initialize);
+  const status = useSessionStore((state) => state.status);
+  const user = useSessionStore((state) => state.user);
+  const token = useSessionStore((state) => state.token);
+  const login = useSessionStore((state) => state.login);
+  const register = useSessionStore((state) => state.register);
+  const logout = useSessionStore((state) => state.logout);
+  const error = useSessionStore((state) => state.error);
 
   useEffect(() => {
     initialize();
@@ -20,4 +20,4 @@ export const useAuth = () => {
 };
 
 export const useIsAuthenticated = () =>
-  useAuthStore((state) => state.status === 'authenticated');
+  useSessionStore((state) => state.status === 'authenticated');
