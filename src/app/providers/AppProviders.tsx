@@ -6,7 +6,7 @@ import { I18nextProvider } from 'react-i18next';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { persistOptions, queryClient } from 'core/config/queryClient';
-import i18n from 'core/config/i18n';
+import i18n from 'core/i18n';
 import { ThemeProvider, useTheme } from 'core/theme';
 import { AppNavigator } from 'app/navigation/AppNavigator';
 
