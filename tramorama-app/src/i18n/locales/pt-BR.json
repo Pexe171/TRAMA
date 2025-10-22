@@ -1,0 +1,43 @@
+{
+  "app": {
+    "title": "Tramorama",
+    "tagline": "Notícias e histórias do portal Trama"
+  },
+  "navigation": {
+    "home": "Início",
+    "sections": "Editorias",
+    "about": "Quem Somos",
+    "login": "Entrar",
+    "register": "Criar conta"
+  },
+  "home": {
+    "welcome": "Bem-vindo ao Tramorama",
+    "description": "Explore editorias, leia artigos e acompanhe a Trama na palma da mão.",
+    "highlights": "Em destaque",
+    "latest": "Últimas matérias",
+    "greeting": "Olá, {{name}}!",
+    "authCall": "Entre para acompanhar novidades e salvar matérias."
+  },
+  "auth": {
+    "email": "E-mail",
+    "password": "Senha",
+    "name": "Nome",
+    "loginCta": "Entrar",
+    "registerCta": "Cadastrar",
+    "logout": "Sair"
+  },
+  "errors": {
+    "generic": "Algo deu errado. Tente novamente.",
+    "required": "Campo obrigatório"
+  },
+  "offline": {
+    "title": "Você está offline",
+    "description": "Conteúdos recentes continuam disponíveis até que a conexão volte."
+  },
+  "sections": {
+    "empty": "Nenhuma editoria encontrada."
+  },
+  "article": {
+    "title": "Artigo"
+  }
+}

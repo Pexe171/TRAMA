@@ -1,0 +1,18 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "baseUrl": "./",
+    "paths": {
+      "@app/*": ["src/app/*"],
+      "@features/*": ["src/features/*"],
+      "@services/*": ["src/services/*"],
+      "@core/*": ["src/core/*"],
+      "@i18n/*": ["src/i18n/*"]
+    },
+    "types": ["jest", "react", "react-native"],
+    "noEmit": true
+  },
+  "include": ["App.tsx", "expo-entry.js", "src", "jest.setup.ts"],
+  "exclude": ["node_modules"]
+}

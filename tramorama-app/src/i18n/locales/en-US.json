@@ -1,0 +1,43 @@
+{
+  "app": {
+    "title": "Tramorama",
+    "tagline": "News and stories from the Trama portal"
+  },
+  "navigation": {
+    "home": "Home",
+    "sections": "Sections",
+    "about": "About",
+    "login": "Login",
+    "register": "Sign up"
+  },
+  "home": {
+    "welcome": "Welcome to Tramorama",
+    "description": "Browse sections, read articles and stay close to Trama on the go.",
+    "highlights": "Highlights",
+    "latest": "Latest stories",
+    "greeting": "Hello, {{name}}!",
+    "authCall": "Log in to follow updates and save stories."
+  },
+  "auth": {
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "loginCta": "Login",
+    "registerCta": "Sign up",
+    "logout": "Logout"
+  },
+  "errors": {
+    "generic": "Something went wrong. Please try again.",
+    "required": "Required field"
+  },
+  "offline": {
+    "title": "You are offline",
+    "description": "Recent content stays available until the connection returns."
+  },
+  "sections": {
+    "empty": "No sections found."
+  },
+  "article": {
+    "title": "Article"
+  }
+}
