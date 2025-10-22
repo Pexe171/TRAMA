@@ -3,11 +3,11 @@ import { ScrollView, View } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useTranslation } from 'react-i18next';
 
-import { useTheme } from '../../core/theme';
-import { Button, Card, Loading, Text } from '../components';
-import { useAuth } from '../../features/auth/hooks/useAuth';
-import { useProfileContent } from '../../features/profile/hooks/useProfileContent';
-import { RootStackParamList } from '../navigation/types';
+import { useTheme } from 'core/theme';
+import { Button, Card, Loading, Text } from 'app/components';
+import { useAuth } from 'features/auth/hooks/useAuth';
+import { useProfileContent } from 'features/profile/hooks/useProfileContent';
+import { RootStackParamList } from 'app/navigation/types';
 
 export type ProfileScreenProps = NativeStackScreenProps<RootStackParamList, 'Profile'>;
 

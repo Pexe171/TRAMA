@@ -1,4 +1,4 @@
-import { api } from '../../../services/api/apiClient';
+import { api } from 'services/api/apiClient';
 import { AuthResponse, LoginPayload, RegisterPayload } from './types';
 
 export const loginRequest = (payload: LoginPayload) =>

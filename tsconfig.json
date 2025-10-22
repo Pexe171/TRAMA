@@ -9,6 +9,13 @@
     "noEmit": true,
     "skipLibCheck": true,
     "strict": true,
+    "baseUrl": "./src",
+    "paths": {
+      "app/*": ["app/*"],
+      "features/*": ["features/*"],
+      "core/*": ["core/*"],
+      "services/*": ["services/*"]
+    },
     "resolveJsonModule": true,
     "types": ["jest", "react", "react-native"]
   },

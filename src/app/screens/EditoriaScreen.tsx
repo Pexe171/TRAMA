@@ -3,11 +3,11 @@ import { FlatList, ImageBackground, RefreshControl, Share, View } from 'react-na
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useTranslation } from 'react-i18next';
 
-import { env } from '../../core/config/env';
-import { useTheme } from '../../core/theme';
-import { Button, Card, ErrorState, Loading, Text } from '../components';
-import { useEditoria } from '../../features/editoria/hooks/useEditoria';
-import { RootStackParamList } from '../navigation/types';
+import { env } from 'core/config/env';
+import { useTheme } from 'core/theme';
+import { Button, Card, ErrorState, Loading, Text } from 'app/components';
+import { useEditoria } from 'features/editoria/hooks/useEditoria';
+import { RootStackParamList } from 'app/navigation/types';
 
 export type EditoriaScreenProps = NativeStackScreenProps<RootStackParamList, 'Editoria'>;
 

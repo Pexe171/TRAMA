@@ -1,7 +1,7 @@
 import React from 'react';
 import { ActivityIndicator, View } from 'react-native';
 
-import { useTheme } from '../../core/theme';
+import { useTheme } from 'core/theme';
 import { Text } from './Text';
 
 type Props = {

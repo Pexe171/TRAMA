@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 
-import { cacheStorage } from '../../../services/storage/cacheStorage';
-import { secureTokenStorage } from '../../../services/storage/secureTokenStorage';
+import { cacheStorage } from 'services/storage/cacheStorage';
+import { secureTokenStorage } from 'services/storage/secureTokenStorage';
 import { loginRequest, registerRequest } from '../api';
 import { AuthResponse, AuthUser, LoginPayload, RegisterPayload } from '../api/types';
 

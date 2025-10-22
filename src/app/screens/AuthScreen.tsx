@@ -9,10 +9,10 @@ import {
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useTranslation } from 'react-i18next';
 
-import { useTheme } from '../../core/theme';
-import { Button, Card, Text } from '../components';
-import { useAuth } from '../../features/auth/hooks/useAuth';
-import { RootStackParamList } from '../navigation/types';
+import { useTheme } from 'core/theme';
+import { Button, Card, Text } from 'app/components';
+import { useAuth } from 'features/auth/hooks/useAuth';
+import { RootStackParamList } from 'app/navigation/types';
 
 export type AuthScreenProps = NativeStackScreenProps<RootStackParamList, 'Auth'>;
 

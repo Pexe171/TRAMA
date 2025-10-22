@@ -1,12 +1,12 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { useTheme } from '../../core/theme';
-import { ArticleScreen } from '../screens/ArticleScreen';
-import { AuthScreen } from '../screens/AuthScreen';
-import { EditoriaScreen } from '../screens/EditoriaScreen';
-import { HomeScreen } from '../screens/HomeScreen';
-import { ProfileScreen } from '../screens/ProfileScreen';
+import { useTheme } from 'core/theme';
+import { ArticleScreen } from 'app/screens/ArticleScreen';
+import { AuthScreen } from 'app/screens/AuthScreen';
+import { EditoriaScreen } from 'app/screens/EditoriaScreen';
+import { HomeScreen } from 'app/screens/HomeScreen';
+import { ProfileScreen } from 'app/screens/ProfileScreen';
 import { RootStackParamList } from './types';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();

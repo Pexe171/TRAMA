@@ -1,8 +1,8 @@
 import axios, { AxiosRequestHeaders } from 'axios';
 
-import { env } from '../../core/config/env';
-import { logger } from '../../core/utils/logger';
-import { secureTokenStorage } from '../storage/secureTokenStorage';
+import { env } from 'core/config/env';
+import { logger } from 'core/utils/logger';
+import { secureTokenStorage } from 'services/storage/secureTokenStorage';
 
 type LoginPayload = {
   email: string;
