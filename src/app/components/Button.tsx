@@ -9,7 +9,7 @@ import {
   ViewStyle
 } from 'react-native';
 
-import { useTheme } from '../../core/theme';
+import { useTheme } from 'core/theme';
 
 type ButtonVariant = 'primary' | 'secondary' | 'ghost';
 

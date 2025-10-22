@@ -1,7 +1,7 @@
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react-native';
 
-import { ThemeProvider } from '../../../core/theme/ThemeProvider';
+import { ThemeProvider } from 'core/theme';
 import { Button } from '../Button';
 
 describe('Button', () => {

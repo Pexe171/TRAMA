@@ -3,11 +3,11 @@ import { Image, ImageBackground, ScrollView, View } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useTranslation } from 'react-i18next';
 
-import { useTheme } from '../../core/theme';
-import { Button, Card, ErrorState, Loading, Text } from '../components';
-import { useEditorias } from '../../features/editoria/hooks/useEditorias';
-import { useHome } from '../../features/home/hooks/useHome';
-import { RootStackParamList } from '../navigation/types';
+import { useTheme } from 'core/theme';
+import { Button, Card, ErrorState, Loading, Text } from 'app/components';
+import { useEditorias } from 'features/editoria/hooks/useEditorias';
+import { useHome } from 'features/home/hooks/useHome';
+import { RootStackParamList } from 'app/navigation/types';
 
 export type HomeScreenProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
 

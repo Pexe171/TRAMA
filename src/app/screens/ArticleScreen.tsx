@@ -3,13 +3,13 @@ import { Image, ScrollView, Share, View } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useTranslation } from 'react-i18next';
 
-import { env } from '../../core/config/env';
-import { useTheme } from '../../core/theme';
-import { formatDate, formatViews } from '../../core/utils/format';
-import { Button, Card, ErrorState, Loading, Text } from '../components';
-import { useArticle } from '../../features/article/hooks/useArticle';
-import { useProfileContent } from '../../features/profile/hooks/useProfileContent';
-import { RootStackParamList } from '../navigation/types';
+import { env } from 'core/config/env';
+import { useTheme } from 'core/theme';
+import { formatDate, formatViews } from 'core/utils/format';
+import { Button, Card, ErrorState, Loading, Text } from 'app/components';
+import { useArticle } from 'features/article/hooks/useArticle';
+import { useProfileContent } from 'features/profile/hooks/useProfileContent';
+import { RootStackParamList } from 'app/navigation/types';
 
 export type ArticleScreenProps = NativeStackScreenProps<RootStackParamList, 'Article'>;
 

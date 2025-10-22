@@ -5,10 +5,10 @@ import { StatusBar } from 'expo-status-bar';
 import { I18nextProvider } from 'react-i18next';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import { persistOptions, queryClient } from '../../core/config/queryClient';
-import i18n from '../../core/config/i18n';
-import { ThemeProvider, useTheme } from '../../core/theme';
-import { AppNavigator } from '../navigation/AppNavigator';
+import { persistOptions, queryClient } from 'core/config/queryClient';
+import i18n from 'core/config/i18n';
+import { ThemeProvider, useTheme } from 'core/theme';
+import { AppNavigator } from 'app/navigation/AppNavigator';
 
 const ThemedNavigation: React.FC = () => {
   const { navigationTheme, mode } = useTheme();

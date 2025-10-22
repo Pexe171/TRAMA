@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleProp, Text as RNText, TextProps as RNTextProps, TextStyle } from 'react-native';
 
-import { useTheme } from '../../core/theme';
+import { useTheme } from 'core/theme';
 
 type TextVariant = 'title' | 'subtitle' | 'body' | 'caption' | 'overline';
 

@@ -1,4 +1,4 @@
-import { api } from '../../../services/api/apiClient';
+import { api } from 'services/api/apiClient';
 import { ArticleContent } from '../types';
 
 export const fetchArticle = (editoriaSlug: string, articleSlug: string) =>

@@ -1,4 +1,4 @@
-import { api } from '../../../services/api/apiClient';
+import { api } from 'services/api/apiClient';
 import { Editoria, EditoriaDetails } from '../types';
 
 export const fetchEditorias = () => api.getEditorias<Editoria[]>();
