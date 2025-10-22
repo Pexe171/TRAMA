@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 
 import { cacheStorage } from 'services/storage/cacheStorage';
-import { secureTokenStorage } from 'services/storage/secureTokenStorage';
+import { secureToken } from 'services/storage/secureToken';
 import { loginRequest, registerRequest } from '../api';
 import { AuthResponse, AuthUser, LoginPayload, RegisterPayload } from '../api/types';
 
@@ -34,7 +34,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
 
     try {
       const [token, cachedUser] = await Promise.all([
-        secureTokenStorage.getToken(),
+        secureToken.getToken(),
         cacheStorage.get<AuthUser>(USER_CACHE_KEY)
       ]);
 
@@ -53,7 +53,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
 
     try {
       const response = await loginRequest(payload);
-      await secureTokenStorage.setToken(response.token);
+      await secureToken.setToken(response.token);
       await cacheStorage.set<AuthUser>(USER_CACHE_KEY, response.user);
 
       set({ user: response.user, token: response.token, status: 'authenticated' });
@@ -68,7 +68,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
 
     try {
       const response = await registerRequest(payload);
-      await secureTokenStorage.setToken(response.token);
+      await secureToken.setToken(response.token);
       await cacheStorage.set<AuthUser>(USER_CACHE_KEY, response.user);
 
       set({ user: response.user, token: response.token, status: 'authenticated' });
@@ -80,7 +80,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   },
   logout: async () => {
     await Promise.all([
-      secureTokenStorage.removeToken(),
+      secureToken.removeToken(),
       cacheStorage.remove(USER_CACHE_KEY)
     ]);
     set({ user: null, token: null, status: 'idle', error: null });
