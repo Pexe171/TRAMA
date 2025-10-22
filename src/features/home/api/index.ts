@@ -1,4 +1,4 @@
-import { api } from 'services/api/apiClient';
+import { getHome } from 'services/api/apiClient';
 import { HomeData } from '../types';
 
-export const fetchHome = () => api.getHome<HomeData>();
+export const fetchHome = () => getHome<HomeData>();
