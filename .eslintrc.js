@@ -1,15 +1,9 @@
 module.exports = {
   root: true,
-  env: {
-    es2021: true,
-    'react-native/react-native': true
-  },
   extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
+    '@react-native-community',
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
-    'plugin:react-native/all',
     'prettier'
   ],
   parser: '@typescript-eslint/parser',
@@ -17,10 +11,13 @@ module.exports = {
     ecmaFeatures: {
       jsx: true
     },
-    ecmaVersion: 'latest',
+    ecmaVersion: 2021,
     sourceType: 'module'
   },
-  plugins: ['react', '@typescript-eslint', 'react-native'],
+  plugins: ['@typescript-eslint'],
+  env: {
+    es2021: true
+  },
   settings: {
     react: {
       version: 'detect'
@@ -28,8 +25,13 @@ module.exports = {
   },
   rules: {
     'react/react-in-jsx-scope': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }
+    ],
     'react-native/no-inline-styles': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off'
+    'prettier/prettier': 'off'
   },
   overrides: [
     {
@@ -38,5 +40,6 @@ module.exports = {
         jest: true
       }
     }
-  ]
+  ],
+  ignorePatterns: ['node_modules/', 'babel.config.js', 'metro.config.js']
 };

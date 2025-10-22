@@ -8,8 +8,10 @@
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web",
-    "lint": "eslint . --ext .ts,.tsx --max-warnings=0",
-    "test": "jest --watchAll=false",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx --max-warnings=0",
+    "format": "prettier --check \".eslintrc.js\" \"jest.config.js\" \"jest.setup.ts\" \"src/app/__tests__/**/*.{ts,tsx}\"",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -47,10 +49,13 @@
     "@types/react-test-renderer": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
     "@typescript-eslint/parser": "^7.2.0",
+    "@react-native-community/eslint-config": "^3.2.0",
     "babel-jest": "^29.7.0",
     "babel-plugin-module-resolver": "^5.0.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-jest": "^27.9.0",
+    "eslint-plugin-prettier": "^5.5.4",
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-native": "^4.0.0",
@@ -59,6 +64,7 @@
     "prettier": "^3.2.5",
     "react-test-renderer": "18.2.0",
     "ts-jest": "^29.1.1",
+    "typescript-eslint": "^7.8.0",
     "typescript": "~5.3.3",
     "dotenv": "^16.4.5"
   }
