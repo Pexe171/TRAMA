@@ -1,6 +1,9 @@
 module.exports = {
   preset: 'jest-expo',
+  clearMocks: true,
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+  testMatch: ['<rootDir>/src/**/*.test.ts?(x)'],
+  testPathIgnorePatterns: ['/node_modules/', '/dist/', '/build/'],
   transformIgnorePatterns: [
     'node_modules/(?!(jest-)?react-native|@react-native|@react-navigation|expo(nent)?|@expo|@unimodules|unimodules|sentry-expo|@sentry|native-base)'
   ],
