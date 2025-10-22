@@ -1,21 +1,34 @@
-Dependências
-
-/node_modules
-/client/node_modules
-
-Pastas de build de produção
-
-/build
-/dist
-/client/build
-
-Logs
-
+# Node
+node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-Arquivos de sistema
+# Next.js
+.next/
+out/
+build/
 
+# Logs
+logs
+*.log
+*.log.*
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Editor
+.vscode/
+.idea/
 .DS_Store
+*.swp
+
+# OS / Misc
 Thumbs.db
